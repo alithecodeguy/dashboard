@@ -8,21 +8,13 @@ import { Input } from 'antd';
 import { Typography } from 'antd';
 import { BellFilled, SearchOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
+// destructure
 const { Text } = Typography;
 
-import type { GetProps } from 'antd';
-
-type SearchProps = GetProps<typeof Input.Search>;
-
-const { Search } = Input;
-
-const PageContentHeaderWithIconAndBackButton: FC<{
+const LayoutHeader: FC<{
   collapsed: boolean;
-  toggleCollapsed: () => void;
   toggleDrawer: () => void;
-}> = ({ collapsed, toggleCollapsed, toggleDrawer }) => {
-  const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
-
+}> = ({ collapsed, toggleDrawer }) => {
   return (
     <Header
       style={{
@@ -82,4 +74,4 @@ const PageContentHeaderWithIconAndBackButton: FC<{
   );
 };
 
-export default PageContentHeaderWithIconAndBackButton;
+export default LayoutHeader;

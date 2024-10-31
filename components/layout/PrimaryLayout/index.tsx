@@ -8,10 +8,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Content } from 'antd/lib/layout/layout';
 import { usePathname, useRouter } from 'next/navigation';
-import { Button, Drawer, Flex, Input, Layout, Menu } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-
-// libraries
+import { Drawer, Flex, Input, Layout, Menu } from 'antd';
 import {
   CalendarFilled,
   LogoutOutlined,
@@ -22,7 +19,7 @@ import {
   LayoutFilled,
   CreditCardFilled,
   QuestionCircleFilled,
-  MenuUnfoldOutlined
+  SearchOutlined
 } from '@ant-design/icons';
 
 // configs
@@ -34,9 +31,8 @@ import { primaryLayoutReactStyles } from './primaryLayoutReactStyles.ts';
 // hooks
 import withAuth from '@/hoc/withAuth.jsx';
 
-// redux
-
-import PageContentHeaderWithIconAndBackButton from '@/components/common/PageContentHeaderWithIconAndBackButton/index.tsx';
+// components
+import LayoutHeader from '@/components/common/LayoutHeader/index.tsx';
 
 // destructure
 const { Sider } = Layout;
@@ -52,6 +48,10 @@ function getItem(label: ReactNode, key: Key, icon?: ReactNode, children?: MenuIt
 }
 
 const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
+  // local states
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [drawerStatus, setDrawerStatus] = useState<boolean>(false);
+
   // menu items
   const dashboardItems: MenuItem[] = [
     getItem('Orders', routes.HOME, <ShoppingFilled className="custom-menu-item-icon-size" />),
@@ -100,24 +100,19 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     // TODO: implement logout function
   };
 
-  useEffect(() => {
-    setSelectedKeys([pathname]);
-  }, [pathname]);
-
-  const [collapsed, setCollapsed] = useState(false);
-  const [drawerStatus, setDrawerStatus] = useState(false);
-
+  // handlers
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
 
   const toggleDrawer = () => {
-    console.log('xxx');
     setDrawerStatus(!drawerStatus);
   };
 
-  console.log('drawerStatus');
-  console.log(drawerStatus);
+  // side effects
+  useEffect(() => {
+    setSelectedKeys([pathname]);
+  }, [pathname]);
 
   return (
     <Layout style={primaryLayoutReactStyles.container()}>
@@ -195,11 +190,7 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
           position: 'relative'
         }}
       >
-        <PageContentHeaderWithIconAndBackButton
-          collapsed={collapsed}
-          toggleCollapsed={toggleCollapsed}
-          toggleDrawer={toggleDrawer}
-        />
+        <LayoutHeader collapsed={collapsed} toggleDrawer={toggleDrawer} />
         <Content style={{ padding: 20, background: 'white' }}>{children}</Content>
       </Layout>
     </Layout>
