@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Content } from 'antd/lib/layout/layout';
 import { usePathname, useRouter } from 'next/navigation';
-import { Drawer, Flex, Input, Layout, Menu } from 'antd';
+import { Drawer, Flex, Input, Layout, Menu, Radio } from 'antd';
 import {
   CalendarFilled,
   LogoutOutlined,
@@ -131,14 +131,12 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
           setDrawerStatus(false);
         }}
         trigger={null}
-        style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}
-      >
+        style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}>
         <Flex vertical style={primaryLayoutReactStyles.siderContent()}>
           <Flex
             justify="center"
             style={primaryLayoutReactStyles.siderHeader()}
-            onClick={() => router.push(routes.HOME)}
-          >
+            onClick={() => router.push(routes.HOME)}>
             <Image src={'/assets/images/png/logo.png'} width={136} height={33} alt={'logo'} />
           </Flex>
           <Flex vertical justify="space-between" flex="1 1 auto">
@@ -154,14 +152,23 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
         </Flex>
       </Sider>
       <Drawer
-        width={280}
+        width={300}
         title="Digimenu"
         placement="left"
         closable={true}
         onClose={() => setDrawerStatus(false)}
         visible={drawerStatus}
-        style={{ padding: 0 }}
-      >
+        extra={
+          <Radio.Group
+            buttonStyle="solid"
+            defaultValue="EN"
+            // value={position} onChange={(e) => setPosition(e.target.value)}
+          >
+            <Radio.Button value="EN">EN</Radio.Button>
+            <Radio.Button value="DE">DE</Radio.Button>
+          </Radio.Group>
+        }
+        style={{ padding: 0 }}>
         <Flex vertical justify="space-between" flex="1 1 auto">
           <Input
             // onChange={onSearch}
@@ -188,8 +195,7 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
           maxHeight: '100%',
           overflow: 'auto',
           position: 'relative'
-        }}
-      >
+        }}>
         <LayoutHeader collapsed={collapsed} toggleDrawer={toggleDrawer} />
         <Content style={{ padding: 20, background: 'white' }}>{children}</Content>
       </Layout>

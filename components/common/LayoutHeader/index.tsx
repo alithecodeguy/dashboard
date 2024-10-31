@@ -25,8 +25,7 @@ const LayoutHeader: FC<{
         display: 'flex',
         alignItems: 'center',
         borderBottom: '2px solid rgba(0,0,0,0.06)'
-      }}
-    >
+      }}>
       <Flex justify="space-between" align="center" style={{ width: '100%' }}>
         <Flex align="center" gap={24}>
           {collapsed && (
@@ -47,14 +46,16 @@ const LayoutHeader: FC<{
         </Flex>
 
         <Flex align="center" gap={24}>
-          <Radio.Group
-            buttonStyle="solid"
-            defaultValue="EN"
-            // value={position} onChange={(e) => setPosition(e.target.value)}
-          >
-            <Radio.Button value="EN">EN</Radio.Button>
-            <Radio.Button value="DE">DE</Radio.Button>
-          </Radio.Group>
+          {!collapsed && (
+            <Radio.Group
+              buttonStyle="solid"
+              defaultValue="EN"
+              // value={position} onChange={(e) => setPosition(e.target.value)}
+            >
+              <Radio.Button value="EN">EN</Radio.Button>
+              <Radio.Button value="DE">DE</Radio.Button>
+            </Radio.Group>
+          )}
           <Badge count={0} showZero>
             <Avatar
               style={{ background: '#E6F7FF', color: '#1890FF' }}
