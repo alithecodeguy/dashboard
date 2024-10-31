@@ -15,7 +15,11 @@ import {
   LogoutOutlined,
   ShoppingFilled,
   ReadFilled,
-  SettingFilled
+  SettingFilled,
+  ContactsFilled,
+  LayoutFilled,
+  CreditCardFilled,
+  QuestionCircleFilled
 } from '@ant-design/icons';
 
 // configs
@@ -61,10 +65,26 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     getItem('Setting', '/setting', <SettingFilled className="custom-menu-item-icon-size" />, [
       getItem('Hours Setting', routes.HOURS_SETTING),
       getItem('Discounts', routes.DISCOUNTS)
-    ])
+    ]),
+    getItem('Waiters', routes.WAITERS, <ContactsFilled className="custom-menu-item-icon-size" />),
+    getItem(
+      'POS System',
+      routes.POS_SYSTEM,
+      <LayoutFilled className="custom-menu-item-icon-size" />
+    ),
+    getItem(
+      'Finances',
+      routes.FINANCES,
+      <CreditCardFilled className="custom-menu-item-icon-size" />
+    ),
+    getItem(
+      'Support',
+      routes.SUPPORT,
+      <QuestionCircleFilled className="custom-menu-item-icon-size" />
+    )
   ];
 
-  const logoutItems: MenuItem[] = [getItem('log out', 'menu_item_3', <LogoutOutlined />)];
+  const logoutItems: MenuItem[] = [getItem('Log Out', 'menu_item_3', <LogoutOutlined />)];
 
   // hooks
   const router = useRouter();
@@ -101,16 +121,10 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
               selectedKeys={selectedKeys}
               mode="inline"
               items={dashboardItems}
-              style={primaryLayoutReactStyles.menuItem()}
               onClick={({ key }: { key: string }) => router.push(key)}
             />
 
-            <Menu
-              mode="inline"
-              items={logoutItems}
-              onClick={logout}
-              style={primaryLayoutReactStyles.menuItem()}
-            />
+            <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
           </Flex>
         </Flex>
       </Sider>
