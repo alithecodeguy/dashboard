@@ -51,6 +51,23 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // local states
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [drawerStatus, setDrawerStatus] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const updateView = () => {
+    const isMobileView = window.innerWidth <= 768; // Adjust the breakpoint as needed
+    setIsMobile(isMobileView);
+    if (isMobileView) {
+      setCollapsed(true); // Collapse the Sider on mobile
+    } else {
+      setCollapsed(false); // Expand the Sider on larger screens
+    }
+  };
+
+  useEffect(() => {
+    updateView(); // Check the initial view
+    window.addEventListener('resize', updateView); // Update view on resize
+    return () => window.removeEventListener('resize', updateView);
+  }, []);
 
   // menu items
   const dashboardItems: MenuItem[] = [
@@ -116,44 +133,52 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <Layout style={primaryLayoutReactStyles.container()}>
-      <Sider
-        theme="light"
-        width={236}
-        breakpoint="lg"
-        collapsedWidth="0"
-        collapsible
-        collapsed={collapsed}
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          toggleCollapsed();
-          setDrawerStatus(false);
-        }}
-        trigger={null}
-        style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}>
-        <Flex vertical style={primaryLayoutReactStyles.siderContent()}>
-          <Flex
-            justify="center"
-            style={primaryLayoutReactStyles.siderHeader()}
-            onClick={() => router.push(routes.HOME)}>
-            <Image src={'/assets/images/png/logo.png'} width={136} height={33} alt={'logo'} />
-          </Flex>
-          <Flex vertical justify="space-between" flex="1 1 auto">
-            <Menu
-              selectedKeys={selectedKeys}
-              mode="inline"
-              items={dashboardItems}
-              onClick={({ key }: { key: string }) => {
-                router.push(key);
-                setDrawerStatus(false);
-              }}
-            />
+      {!isMobile && (
+        <Sider
+          theme="light"
+          width={236}
+          breakpoint="lg"
+          collapsedWidth="0"
+          collapsible
+          collapsed={collapsed}
+          onBreakpoint={(broken) => {
+            console.log(broken);
+          }}
+          onCollapse={(collapsed, type) => {
+            toggleCollapsed();
+            setDrawerStatus(false);
+          }}
+          trigger={null}
+          style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}>
+          <Flex vertical style={primaryLayoutReactStyles.siderContent()}>
+            <Flex
+              justify="center"
+              style={primaryLayoutReactStyles.siderHeader()}
+              onClick={() => router.push(routes.HOME)}>
+              <Image src={'/assets/images/png/logo.png'} width={136} height={33} alt={'logo'} />
+            </Flex>
+            <Flex vertical justify="space-between" flex="1 1 auto">
+              <Menu
+                selectedKeys={selectedKeys}
+                mode="inline"
+                items={dashboardItems}
+                onClick={({ key }: { key: string }) => {
+                  router.push(key);
+                  setDrawerStatus(false);
+                }}
+              />
 
-            <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
+              <Menu
+                mode="inline"
+                items={logoutItems}
+                onClick={logout}
+                style={{ color: '#FF4D4F' }}
+              />
+            </Flex>
           </Flex>
-        </Flex>
-      </Sider>
+        </Sider>
+      )}
+
       <Drawer
         width={300}
         title="Digimenu"
