@@ -36,8 +36,7 @@ const CustomDrawer: FC<{
           <Radio.Button value="DE">DE</Radio.Button>
         </Radio.Group>
       }
-      style={{ padding: 0 }}
-    >
+      style={{ padding: 0 }}>
       <Flex vertical justify="space-between" flex="1 1 auto">
         <Input
           // onChange={onSearch}
@@ -53,7 +52,7 @@ const CustomDrawer: FC<{
           items={dashboardItems}
           onClick={({ key }: { key: string }) => {
             router.push(key);
-            closeDrawer;
+            closeDrawer();
           }}
           style={{ borderInlineEnd: '0px' }}
         />
