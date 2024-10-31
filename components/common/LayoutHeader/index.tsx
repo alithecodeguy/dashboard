@@ -25,7 +25,8 @@ const LayoutHeader: FC<{
         display: 'flex',
         alignItems: 'center',
         borderBottom: '2px solid rgba(0,0,0,0.06)'
-      }}>
+      }}
+    >
       <Flex justify="space-between" align="center" style={{ width: '100%' }}>
         <Flex align="center" gap={24}>
           {collapsed && (
