@@ -144,7 +144,10 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
               selectedKeys={selectedKeys}
               mode="inline"
               items={dashboardItems}
-              onClick={({ key }: { key: string }) => router.push(key)}
+              onClick={({ key }: { key: string }) => {
+                router.push(key);
+                setDrawerStatus(false);
+              }}
             />
 
             <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
@@ -182,7 +185,10 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
             selectedKeys={selectedKeys}
             mode="inline"
             items={dashboardItems}
-            onClick={({ key }: { key: string }) => router.push(key)}
+            onClick={({ key }: { key: string }) => {
+              router.push(key);
+              setDrawerStatus(false);
+            }}
             style={{ borderInlineEnd: '0px' }}
           />
 
