@@ -8,7 +8,9 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Content } from 'antd/lib/layout/layout';
 import { usePathname, useRouter } from 'next/navigation';
-import { Flex, Layout, Menu } from 'antd';
+import { Button, Drawer, Flex, Input, Layout, Menu } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+
 // libraries
 import {
   CalendarFilled,
@@ -19,7 +21,8 @@ import {
   ContactsFilled,
   LayoutFilled,
   CreditCardFilled,
-  QuestionCircleFilled
+  QuestionCircleFilled,
+  MenuUnfoldOutlined
 } from '@ant-design/icons';
 
 // configs
@@ -101,11 +104,38 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     setSelectedKeys([pathname]);
   }, [pathname]);
 
+  const [collapsed, setCollapsed] = useState(false);
+  const [drawerStatus, setDrawerStatus] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const toggleDrawer = () => {
+    console.log('xxx');
+    setDrawerStatus(!drawerStatus);
+  };
+
+  console.log('drawerStatus');
+  console.log(drawerStatus);
+
   return (
     <Layout style={primaryLayoutReactStyles.container()}>
       <Sider
         theme="light"
         width={236}
+        breakpoint="lg"
+        collapsedWidth="0"
+        collapsible
+        collapsed={collapsed}
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          toggleCollapsed();
+          setDrawerStatus(false);
+        }}
+        trigger={null}
         style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}
       >
         <Flex vertical style={primaryLayoutReactStyles.siderContent()}>
@@ -128,6 +158,35 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
           </Flex>
         </Flex>
       </Sider>
+      <Drawer
+        width={280}
+        title="Digimenu"
+        placement="left"
+        closable={true}
+        onClose={() => setDrawerStatus(false)}
+        visible={drawerStatus}
+        style={{ padding: 0 }}
+      >
+        <Flex vertical justify="space-between" flex="1 1 auto">
+          <Input
+            // onChange={onSearch}
+            style={{ width: '100%', marginBottom: 40 }}
+            size="large"
+            placeholder="Search"
+            allowClear
+            prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,0.45)' }} />}
+          />
+          <Menu
+            selectedKeys={selectedKeys}
+            mode="inline"
+            items={dashboardItems}
+            onClick={({ key }: { key: string }) => router.push(key)}
+            style={{ borderInlineEnd: '0px' }}
+          />
+
+          <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
+        </Flex>
+      </Drawer>
       <Layout
         style={{
           height: '100%',
@@ -136,7 +195,11 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
           position: 'relative'
         }}
       >
-        <PageContentHeaderWithIconAndBackButton title="cc" />
+        <PageContentHeaderWithIconAndBackButton
+          collapsed={collapsed}
+          toggleCollapsed={toggleCollapsed}
+          toggleDrawer={toggleDrawer}
+        />
         <Content style={{ padding: 20, background: 'white' }}>{children}</Content>
       </Layout>
     </Layout>

@@ -3,10 +3,10 @@ import type { FC } from 'react';
 
 // strings
 import { Header } from 'antd/lib/layout/layout';
-import { Avatar, Badge, Flex, Radio } from 'antd';
+import { Avatar, Badge, Button, Flex, Radio } from 'antd';
 import { Input } from 'antd';
 import { Typography } from 'antd';
-import { BellFilled, SearchOutlined } from '@ant-design/icons';
+import { BellFilled, SearchOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -16,7 +16,11 @@ type SearchProps = GetProps<typeof Input.Search>;
 
 const { Search } = Input;
 
-const PageContentHeaderWithIconAndBackButton: FC<{ title: string }> = ({ title }) => {
+const PageContentHeaderWithIconAndBackButton: FC<{
+  collapsed: boolean;
+  toggleCollapsed: () => void;
+  toggleDrawer: () => void;
+}> = ({ collapsed, toggleCollapsed, toggleDrawer }) => {
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
   return (
@@ -32,14 +36,23 @@ const PageContentHeaderWithIconAndBackButton: FC<{ title: string }> = ({ title }
       }}
     >
       <Flex justify="space-between" align="center" style={{ width: '100%' }}>
-        <Input
-          // onChange={onSearch}
-          style={{ width: 300 }}
-          size="large"
-          placeholder="Search"
-          allowClear
-          prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,0.45)' }} />}
-        />
+        <Flex align="center" gap={24}>
+          {collapsed && (
+            <Button className="custom-button" onClick={toggleDrawer}>
+              <MenuUnfoldOutlined style={{ fontSize: '20px' }} />
+            </Button>
+          )}
+          {!collapsed && (
+            <Input
+              // onChange={onSearch}
+              style={{ width: 300 }}
+              size="large"
+              placeholder="Search"
+              allowClear
+              prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,0.45)' }} />}
+            />
+          )}
+        </Flex>
 
         <Flex align="center" gap={24}>
           <Radio.Group
