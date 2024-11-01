@@ -1,16 +1,16 @@
 .search_input {
-  width: 100%;
-  margin-bottom: 40px;
+  width: 100% !important;
+  margin-bottom: 40px !important;
 }
 
 .search_input_icon {
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.45) !important;
 }
 
 .top_menu {
-  border-inline-end: 0px;
+  border-inline-end: 0px !important;
 }
 
-.bottom_menu {
-  color: #ff4d4f;
+.logout_bottom_menu_item {
+  color: #ff4d4f !important;
 }

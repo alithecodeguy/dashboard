@@ -1,0 +1,26 @@
+.header {
+  width: 100% !important;
+  height: 96px !important;
+  background: white !important;
+  padding: 25px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.header_inner_container {
+  width: 100% !important;
+}
+
+.sider_collapse_button_icon {
+  font-size: 20px !important;
+}
+
+.search_input_icon {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.avatar {
+  background: #e6f7ff !important;
+  color: #1890ff !important;
+}

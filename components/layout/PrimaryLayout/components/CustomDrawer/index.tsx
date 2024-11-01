@@ -70,7 +70,12 @@ const CustomDrawer: FC<{
           className={styles.top_menu}
         />
 
-        <Menu mode="inline" items={logoutItems} onClick={logout} className={styles.bottom_menu} />
+        <Menu
+          mode="inline"
+          items={logoutItems}
+          onClick={logout}
+          className={styles.logout_bottom_menu_item}
+        />
       </Flex>
     </Drawer>
   );

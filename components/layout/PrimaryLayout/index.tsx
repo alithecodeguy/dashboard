@@ -14,7 +14,7 @@ import styles from './primaryLayout.module.css';
 import withAuth from '@/hoc/withAuth.jsx';
 
 // components
-import LayoutHeader from '@/components/common/LayoutHeader/index.tsx';
+import LayoutHeader from '@/components/layout/PrimaryLayout/components/LayoutHeader';
 import CustomDrawer from './components/CustomDrawer';
 import CustomSider from './components/CustomSider';
 

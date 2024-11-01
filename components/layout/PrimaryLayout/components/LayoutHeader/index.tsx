@@ -7,8 +7,13 @@ import { Avatar, Badge, Button, Flex, Radio } from 'antd';
 import { Input } from 'antd';
 import { Typography } from 'antd';
 import { BellFilled, SearchOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+
+// redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import { openDrawer, selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+
+// styles
+import styles from './layoutHeader.module.css';
 
 // destructure
 const { Text } = Typography;
@@ -20,22 +25,12 @@ const LayoutHeader: FC = () => {
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
   return (
-    <Header
-      style={{
-        width: '100%',
-        height: '96px',
-        background: 'white',
-        padding: '25px 16px',
-        display: 'flex',
-        alignItems: 'center',
-        borderBottom: '2px solid rgba(0,0,0,0.06)'
-      }}
-    >
-      <Flex justify="space-between" align="center" style={{ width: '100%' }}>
+    <Header className={styles.header}>
+      <Flex justify="space-between" align="center" className={styles.header_inner_container}>
         <Flex align="center" gap={24}>
           {isSiderCollapsed && (
             <Button className="custom-button" onClick={() => dispatch(openDrawer())}>
-              <MenuUnfoldOutlined style={{ fontSize: '20px' }} />
+              <MenuUnfoldOutlined className={styles.sider_collapse_button_icon} />
             </Button>
           )}
           {!isSiderCollapsed && (
@@ -45,7 +40,7 @@ const LayoutHeader: FC = () => {
               size="large"
               placeholder="Search"
               allowClear
-              prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,0.45)' }} />}
+              prefix={<SearchOutlined className={styles.search_input_icon} />}
             />
           )}
         </Flex>
@@ -62,12 +57,7 @@ const LayoutHeader: FC = () => {
             </Radio.Group>
           )}
           <Badge count={0} showZero>
-            <Avatar
-              style={{ background: '#E6F7FF', color: '#1890FF' }}
-              shape="square"
-              size="large"
-              icon={<BellFilled />}
-            />
+            <Avatar className={styles.avatar} shape="square" size="large" icon={<BellFilled />} />
           </Badge>
           <Flex>
             <Text>Hello,</Text>

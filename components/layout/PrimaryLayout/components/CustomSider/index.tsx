@@ -74,7 +74,12 @@ const CustomSider: FC<{
             }}
           />
 
-          <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
+          <Menu
+            mode="inline"
+            items={logoutItems}
+            onClick={logout}
+            className={styles.logout_bottom_menu_item}
+          />
         </Flex>
       </Flex>
     </Sider>

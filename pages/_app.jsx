@@ -21,7 +21,7 @@ export default function GiftCardApp({ Component, pageProps }) {
         width: '100dvw',
         maxHeight: '100dvh',
         maxWidth: '100dvw',
-        overflow: 'hidden'
+        overflow: 'auto'
       }}
     >
       <Head>
