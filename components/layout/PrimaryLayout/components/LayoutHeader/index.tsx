@@ -28,7 +28,7 @@ const LayoutHeader: FC = () => {
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
 
   return (
-    <Header className={styles.header}>
+    <Header className={styles.header} style={{ height: isSiderCollapsed ? '70px' : '96px' }}>
       <Flex justify="space-between" align="center" className={styles.header_inner_container}>
         <Flex align="center" gap={16}>
           {isSiderCollapsed && (
