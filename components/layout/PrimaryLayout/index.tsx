@@ -34,7 +34,7 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // side effects
   useEffect(() => {
     dispatch(setCurrentPath(pathname));
-  }, [pathname]);
+  }, [pathname, dispatch]);
 
   return (
     <Layout className={styles.container}>
