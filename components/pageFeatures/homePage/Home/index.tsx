@@ -1,5 +1,5 @@
 // libraries
-import { Button, Col, Flex, Input, Row, Typography } from 'antd';
+import { Button, Col, Flex, Input, Row, Tabs, TabsProps, Typography } from 'antd';
 import { SearchOutlined, DownloadOutlined } from '@ant-design/icons';
 
 // types
@@ -25,10 +25,42 @@ const Home: FC = () => {
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
 
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: 'All Orders',
+      children: 'Content of All Orders'
+    },
+    {
+      key: '2',
+      label: 'New Orders',
+      children: 'Content of New Orders'
+    },
+    {
+      key: '3',
+      label: 'At Restaurant',
+      children: 'Content of At Restaurant'
+    },
+    {
+      key: '4',
+      label: 'At Home',
+      children: 'Content of At Home'
+    },
+    {
+      key: '5',
+      label: 'Archived',
+      children: 'Content of Archived'
+    }
+  ];
+
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
   return (
     <Row>
       <Col span={24}>
-        <Flex vertical gap={24}>
+        <Flex vertical gap={16}>
           <Flex gap={24} align="center" justify="space-between">
             <Flex align="center" gap={24} style={{ flex: 1 }}>
               {!isSiderCollapsed && (
@@ -49,10 +81,7 @@ const Home: FC = () => {
               Export Excel
             </Button>
           </Flex>
-          <Flex vertical gap={24} style={{ background: 'red' }}>
-            <Flex>tabs</Flex>
-            <Flex>table</Flex>
-          </Flex>
+          <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
         </Flex>
       </Col>
     </Row>
