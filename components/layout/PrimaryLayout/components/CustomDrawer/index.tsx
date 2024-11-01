@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 
 // libraries
-import { Drawer, Flex, Input, Menu, Radio } from 'antd';
+import { Avatar, Drawer, Flex, Input, Menu, Radio, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 
@@ -19,6 +19,9 @@ import {
 
 // styles
 import styles from './customDrawer.module.css';
+
+// destructure
+const { Text } = Typography;
 
 const CustomDrawer: FC<{
   logout: () => void;
@@ -51,6 +54,13 @@ const CustomDrawer: FC<{
       }
     >
       <Flex vertical justify="space-between" flex="1 1 auto">
+        <Flex align="center" gap={16} style={{ marginBottom: 16 }}>
+          <Avatar size={44} src="/assets/images/png/sample_avatar.png" />
+          <Flex>
+            <Text strong>Samantha</Text>
+          </Flex>
+        </Flex>
+
         <Input
           // onChange={onSearch}
           className={styles.search_input}

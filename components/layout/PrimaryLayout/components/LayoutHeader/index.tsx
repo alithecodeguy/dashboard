@@ -69,7 +69,7 @@ const LayoutHeader: FC = () => {
               <Text strong>samantha</Text>
             </Flex>
           )}
-          <Avatar size={44} src="/assets/images/png/sample_avatar.png" />
+          {!isSiderCollapsed && <Avatar size={44} src="/assets/images/png/sample_avatar.png" />}
         </Flex>
       </Flex>
     </Header>
