@@ -14,7 +14,7 @@ export async function getStaticProps() {
   return {
     props: {
       hasLayout: true,
-      pageTitle: 'Dashboard'
+      pageTitle: 'Home'
     }
   };
 }

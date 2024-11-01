@@ -1,5 +1,5 @@
 export const routes = {
-  HOME: '/',
+  ORDERS: '/',
   RESERVATION_SETTING: '/reservation-setting',
   TABLES: '/tables',
   CATEGORIES: '/categories',

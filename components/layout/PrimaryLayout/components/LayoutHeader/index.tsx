@@ -10,10 +10,11 @@ import { BellFilled, SearchOutlined, MenuUnfoldOutlined } from '@ant-design/icon
 
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
-import { openDrawer, selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+import { openDrawer, selectCurrentPath, selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
 
 // styles
 import styles from './layoutHeader.module.css';
+import usePageTitle from '@/hooks/usePageTitle';
 
 // destructure
 const { Text } = Typography;
@@ -21,18 +22,21 @@ const { Text } = Typography;
 const LayoutHeader: FC = () => {
   // hooks
   const dispatch = useAppDispatch();
+  const pageTitle = usePageTitle();
 
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
+
   return (
     <Header className={styles.header}>
       <Flex justify="space-between" align="center" className={styles.header_inner_container}>
-        <Flex align="center" gap={24}>
+        <Flex align="center" gap={16}>
           {isSiderCollapsed && (
             <Button className="custom-button" onClick={() => dispatch(openDrawer())}>
               <MenuUnfoldOutlined className={styles.sider_collapse_button_icon} />
             </Button>
           )}
+          {isSiderCollapsed && <Text style={{ fontSize: '20px', paddingTop: 4 }}>{pageTitle}</Text>}
           {!isSiderCollapsed && (
             <Input
               // onChange={onSearch}
@@ -59,10 +63,12 @@ const LayoutHeader: FC = () => {
           <Badge count={0} showZero>
             <Avatar className={styles.avatar} shape="square" size="large" icon={<BellFilled />} />
           </Badge>
-          <Flex>
-            <Text>Hello,</Text>
-            <Text strong>samantha</Text>
-          </Flex>
+          {!isSiderCollapsed && (
+            <Flex>
+              <Text>Hello,</Text>
+              <Text strong>samantha</Text>
+            </Flex>
+          )}
           <Avatar size={44} src="/assets/images/png/sample_avatar.png" />
         </Flex>
       </Flex>

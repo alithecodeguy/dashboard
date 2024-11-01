@@ -59,7 +59,7 @@ const CustomSider: FC<{
         <Flex
           justify="center"
           className={styles.siderHeader}
-          onClick={() => router.push(routes.HOME)}
+          onClick={() => router.push(routes.ORDERS)}
         >
           <Image src={'/assets/images/png/logo.png'} width={136} height={33} alt={'logo'} />
         </Flex>
