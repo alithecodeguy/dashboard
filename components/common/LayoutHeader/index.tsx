@@ -7,14 +7,18 @@ import { Avatar, Badge, Button, Flex, Radio } from 'antd';
 import { Input } from 'antd';
 import { Typography } from 'antd';
 import { BellFilled, SearchOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
+import { openDrawer, selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
 
 // destructure
 const { Text } = Typography;
 
-const LayoutHeader: FC<{
-  collapsed: boolean;
-  toggleDrawer: () => void;
-}> = ({ collapsed, toggleDrawer }) => {
+const LayoutHeader: FC = () => {
+  // hooks
+  const dispatch = useAppDispatch();
+
+  // selectors
+  const isSiderCollapsed = useAppSelector(selectSiderStatus);
   return (
     <Header
       style={{
@@ -29,12 +33,12 @@ const LayoutHeader: FC<{
     >
       <Flex justify="space-between" align="center" style={{ width: '100%' }}>
         <Flex align="center" gap={24}>
-          {collapsed && (
-            <Button className="custom-button" onClick={toggleDrawer}>
+          {isSiderCollapsed && (
+            <Button className="custom-button" onClick={() => dispatch(openDrawer())}>
               <MenuUnfoldOutlined style={{ fontSize: '20px' }} />
             </Button>
           )}
-          {!collapsed && (
+          {!isSiderCollapsed && (
             <Input
               // onChange={onSearch}
               style={{ width: 300 }}
@@ -47,7 +51,7 @@ const LayoutHeader: FC<{
         </Flex>
 
         <Flex align="center" gap={24}>
-          {!collapsed && (
+          {!isSiderCollapsed && (
             <Radio.Group
               buttonStyle="solid"
               defaultValue="EN"

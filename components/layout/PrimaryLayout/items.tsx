@@ -1,6 +1,5 @@
+// libraries
 import { Key, ReactNode } from 'react';
-import { MenuItem } from './primaryLayoutTypes';
-import { routes } from '@/configs/routes';
 import {
   CalendarFilled,
   LogoutOutlined,
@@ -12,6 +11,12 @@ import {
   CreditCardFilled,
   QuestionCircleFilled
 } from '@ant-design/icons';
+
+// types
+import type { MenuItem } from './primaryLayoutTypes';
+
+// configs
+import { routes } from '@/configs/routes';
 
 // utils
 function getItem(label: ReactNode, key: Key, icon?: ReactNode, children?: MenuItem[]): MenuItem {

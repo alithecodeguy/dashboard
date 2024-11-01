@@ -9,14 +9,27 @@ import { useRouter } from 'next/navigation';
 // items
 import { dashboardItems, logoutItems } from '../../items';
 
+// redux
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
+import {
+  closeDrawer,
+  selectCurrentPath,
+  selectDrawerStatus
+} from '@/libs/redux/slices/sharedSlice';
+
+// styles
+import styles from './customDrawer.module.css';
+
 const CustomDrawer: FC<{
-  drawerStatus: boolean;
-  closeDrawer: () => void;
-  selectedKeys: string[];
   logout: () => void;
-}> = ({ drawerStatus, closeDrawer, selectedKeys, logout }) => {
+}> = ({ logout }) => {
   // hooks
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  // selectors
+  const isDrawerClosed = useAppSelector(selectDrawerStatus);
+  const currentPath = useAppSelector(selectCurrentPath);
 
   return (
     <Drawer
@@ -24,8 +37,8 @@ const CustomDrawer: FC<{
       title="Digimenu"
       placement="left"
       closable={true}
-      onClose={closeDrawer}
-      open={drawerStatus}
+      onClose={() => dispatch(closeDrawer())}
+      open={!isDrawerClosed}
       extra={
         <Radio.Group
           buttonStyle="solid"
@@ -36,28 +49,28 @@ const CustomDrawer: FC<{
           <Radio.Button value="DE">DE</Radio.Button>
         </Radio.Group>
       }
-      style={{ padding: 0 }}>
+    >
       <Flex vertical justify="space-between" flex="1 1 auto">
         <Input
           // onChange={onSearch}
-          style={{ width: '100%', marginBottom: 40 }}
+          className={styles.search_input}
           size="large"
           placeholder="Search"
           allowClear
-          prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,0.45)' }} />}
+          prefix={<SearchOutlined className={styles.search_input_icon} />}
         />
         <Menu
-          selectedKeys={selectedKeys}
+          selectedKeys={currentPath}
           mode="inline"
           items={dashboardItems}
           onClick={({ key }: { key: string }) => {
             router.push(key);
-            closeDrawer();
+            dispatch(closeDrawer());
           }}
-          style={{ borderInlineEnd: '0px' }}
+          className={styles.top_menu}
         />
 
-        <Menu mode="inline" items={logoutItems} onClick={logout} style={{ color: '#FF4D4F' }} />
+        <Menu mode="inline" items={logoutItems} onClick={logout} className={styles.bottom_menu} />
       </Flex>
     </Drawer>
   );

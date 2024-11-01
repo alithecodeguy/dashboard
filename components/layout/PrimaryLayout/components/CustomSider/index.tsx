@@ -15,19 +15,27 @@ import styles from './customSider.module.css';
 
 // components
 import { dashboardItems, logoutItems } from '../../items';
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
+import {
+  closeDrawer,
+  selectCurrentPath,
+  selectSiderStatus,
+  toggleSiderStatus
+} from '@/libs/redux/slices/sharedSlice';
 
 // destructure
 const { Sider } = Layout;
 
 const CustomSider: FC<{
-  collapsed: boolean;
-  toggleCollapsed: () => void;
-  selectedKeys: string[];
-  closeDrawer: () => void;
   logout: () => void;
-}> = ({ collapsed, toggleCollapsed, selectedKeys, closeDrawer, logout }) => {
+}> = ({ logout }) => {
   // hooks
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  // selectors
+  const isSiderCollapsed = useAppSelector(selectSiderStatus);
+  const currentPath = useAppSelector(selectCurrentPath);
 
   return (
     <Sider
@@ -36,13 +44,13 @@ const CustomSider: FC<{
       breakpoint="lg"
       collapsedWidth="0"
       collapsible
-      collapsed={collapsed}
+      collapsed={isSiderCollapsed}
       onBreakpoint={(broken) => {
         console.log(broken);
       }}
       onCollapse={() => {
-        toggleCollapsed();
-        closeDrawer();
+        dispatch(toggleSiderStatus());
+        dispatch(closeDrawer());
       }}
       trigger={null}
       style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}
@@ -57,7 +65,7 @@ const CustomSider: FC<{
         </Flex>
         <Flex vertical justify="space-between" flex="1 1 auto">
           <Menu
-            selectedKeys={selectedKeys}
+            selectedKeys={currentPath}
             mode="inline"
             items={dashboardItems}
             onClick={({ key }: { key: string }) => {

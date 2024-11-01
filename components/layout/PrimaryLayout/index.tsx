@@ -2,7 +2,7 @@
 import type { FC, ReactNode } from 'react';
 
 // libraries
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Content } from 'antd/lib/layout/layout';
 import { usePathname } from 'next/navigation';
 import { Layout } from 'antd';
@@ -18,60 +18,31 @@ import LayoutHeader from '@/components/common/LayoutHeader/index.tsx';
 import CustomDrawer from './components/CustomDrawer';
 import CustomSider from './components/CustomSider';
 
-const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
-  // local states
-  const [collapsed, setCollapsed] = useState<boolean>(true);
-  const [drawerStatus, setDrawerStatus] = useState<boolean>(false);
+// redux
+import { useAppDispatch } from '@/libs/redux/hooks';
+import { setCurrentPath } from '@/libs/redux/slices/sharedSlice';
 
+const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // hooks
   const pathname = usePathname();
-
-  // local states
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
+  const dispatch = useAppDispatch();
 
   const logout = () => {
     // TODO: implement logout function
   };
 
-  // handlers
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const toggleDrawer = () => {
-    setDrawerStatus(!drawerStatus);
-  };
-
   // side effects
   useEffect(() => {
-    setSelectedKeys([pathname]);
+    dispatch(setCurrentPath(pathname));
   }, [pathname]);
 
   return (
     <Layout className={styles.container}>
-      <CustomSider
-        collapsed={collapsed}
-        toggleCollapsed={toggleCollapsed}
-        selectedKeys={selectedKeys}
-        closeDrawer={() => setDrawerStatus(false)}
-        logout={logout}
-      />
-      <CustomDrawer
-        drawerStatus={drawerStatus}
-        selectedKeys={selectedKeys}
-        closeDrawer={() => setDrawerStatus(false)}
-        logout={logout}
-      />
-      <Layout
-        style={{
-          height: '100%',
-          maxHeight: '100%',
-          overflow: 'auto',
-          position: 'relative'
-        }}
-      >
-        <LayoutHeader collapsed={collapsed} toggleDrawer={toggleDrawer} />
-        <Content style={{ padding: 20, background: 'white' }}>{children}</Content>
+      <CustomSider logout={logout} />
+      <CustomDrawer logout={logout} />
+      <Layout className={styles.layout}>
+        <LayoutHeader />
+        <Content className={styles.content}>{children}</Content>
       </Layout>
     </Layout>
   );

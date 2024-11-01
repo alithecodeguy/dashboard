@@ -1,5 +1,8 @@
-import { ThemeEnum } from './sharedSliceEnum';
-
 export interface sharedSliceInterface {
-  theme: ThemeEnum;
+  // to detect if sider is close or not
+  isSiderCollapsed: boolean;
+  // to detect if drawer is close or not
+  isDrawerClosed: boolean;
+  // to detect current path
+  currentPath: string[] | undefined;
 }

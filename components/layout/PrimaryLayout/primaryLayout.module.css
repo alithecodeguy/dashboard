@@ -3,3 +3,15 @@
   width: 100%;
   position: relative;
 }
+
+.layout {
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.content {
+  padding: 20;
+  background: white;
+}
