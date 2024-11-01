@@ -53,7 +53,7 @@ const CustomSider: FC<{
         dispatch(closeDrawer());
       }}
       trigger={null}
-      style={{ background: '#FBFBFB', borderRight: '2px solid rgba(0,0,0,0.06)' }}
+      style={{ borderRight: '2px solid rgba(0,0,0,0.06)' }}
     >
       <Flex vertical className={styles.siderContent}>
         <Flex
