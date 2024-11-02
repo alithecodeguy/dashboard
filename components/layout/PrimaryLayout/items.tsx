@@ -33,17 +33,18 @@ export const dashboardItems: MenuItem[] = [
   getItem('Orders', routes.ORDERS, <ShoppingFilled className="custom-menu-item-icon-size" />),
   getItem(
     'Reservation',
-    '/reservation',
-    <CalendarFilled className="custom-menu-item-icon-size" />,
-    [getItem('Reservation Setting', routes.RESERVATION_SETTING), getItem('Tables', routes.TABLES)]
+    routes.RESERVATION,
+    <CalendarFilled className="custom-menu-item-icon-size" />
   ),
   getItem('Food Menu', '/food-menu', <ReadFilled className="custom-menu-item-icon-size" />, [
     getItem('Categories', routes.CATEGORIES),
     getItem('Foods', routes.FOODS)
   ]),
-  getItem('Setting', '/setting', <SettingFilled className="custom-menu-item-icon-size" />, [
-    getItem('Hours Setting', routes.HOURS_SETTING),
-    getItem('Discounts', routes.DISCOUNTS)
+  getItem('Settings', '/settings', <SettingFilled className="custom-menu-item-icon-size" />, [
+    getItem('Hours', routes.HOURS_SETTING),
+    getItem('Discounts', routes.DISCOUNTS_SETTING),
+    getItem('Tables', routes.TABLES_SETTING),
+    getItem('Reservation', routes.RESERVATION_SETTING)
   ]),
   getItem('Waiters', routes.WAITERS, <ContactsFilled className="custom-menu-item-icon-size" />),
   getItem('POS System', routes.POS_SYSTEM, <LayoutFilled className="custom-menu-item-icon-size" />),

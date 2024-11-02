@@ -4,8 +4,8 @@ import { Row } from 'antd';
 // types
 import type { FC } from 'react';
 
-const Tables: FC = () => {
-  return <Row>Tables</Row>;
+const TablesSetting: FC = () => {
+  return <Row>TablesSetting</Row>;
 };
 
-export default Tables;
+export default TablesSetting;

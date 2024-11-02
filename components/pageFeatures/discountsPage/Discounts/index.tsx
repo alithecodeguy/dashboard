@@ -4,8 +4,8 @@ import { Row } from 'antd';
 // types
 import type { FC } from 'react';
 
-const Discounts: FC = () => {
-  return <Row>Discounts</Row>;
+const DiscountsSetting: FC = () => {
+  return <Row>DiscountsSetting</Row>;
 };
 
-export default Discounts;
+export default DiscountsSetting;
