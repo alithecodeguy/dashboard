@@ -17,10 +17,16 @@ import withAuth from '@/hoc/withAuth.jsx';
 import LayoutHeader from '@/components/layout/PrimaryLayout/components/LayoutHeader';
 import CustomDrawer from './components/CustomDrawer';
 import CustomSider from './components/CustomSider';
+import PageLoader from '../PageLoader.tsx';
 
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
-import { selectSiderStatus, setCurrentPath, setPageSize } from '@/libs/redux/slices/sharedSlice';
+import {
+  selectPageSize,
+  selectSiderStatus,
+  setCurrentPath,
+  setPageSize
+} from '@/libs/redux/slices/sharedSlice';
 
 // enums
 import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
@@ -36,6 +42,7 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
+  const pageSize = useAppSelector(selectPageSize);
 
   const logout = () => {
     // TODO: implement logout function
@@ -46,24 +53,26 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     dispatch(setCurrentPath(pathname));
 
     const handleResize = () => {
-      if (window.innerWidth) {
-        if (window.innerWidth >= 1280) {
-          dispatch(setPageSize(PageSizeEnum.LG));
-        } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-          dispatch(setPageSize(PageSizeEnum.MD));
-        } else {
-          dispatch(setPageSize(PageSizeEnum.SM));
-        }
+      if (window.innerWidth >= 1280) {
+        dispatch(setPageSize(PageSizeEnum.LG));
+      } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        dispatch(setPageSize(PageSizeEnum.MD));
+      } else {
+        dispatch(setPageSize(PageSizeEnum.SM));
       }
     };
 
+    handleResize(); // Call the handler once on component mount
     window.addEventListener('resize', handleResize);
-
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [pathname, dispatch]);
+
+  if (!pageSize) {
+    return <PageLoader />;
+  }
 
   return (
     <Layout hasSider>
