@@ -1,17 +1,31 @@
 // libraries
-import { Space, Tag } from 'antd';
+import { Flex, Space, Tag, Typography } from 'antd';
 
 // types
 import type { TableProps } from 'antd';
 import type { DataType } from './ordersTableType';
+
+// destrcuture
+const { Text } = Typography;
 
 type ColumnsType<T extends object> = TableProps<T>['columns'];
 
 export const ordersTableColumns: ColumnsType<DataType> = [
   {
     title: 'Order',
-    dataIndex: 'order',
-    key: 'order'
+    dataIndex: 'orderId',
+    key: 'orderId',
+    render: (orderId, record) => {
+      console.log(record);
+      return (
+        <Flex vertical>
+          <Text>
+            {record.newOrder ? '(New)' : ''} #{record.orderId}
+          </Text>
+          <Text>{record.email}</Text>
+        </Flex>
+      );
+    }
   },
   {
     title: 'Status',

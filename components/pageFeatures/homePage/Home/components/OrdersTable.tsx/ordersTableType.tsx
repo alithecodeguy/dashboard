@@ -8,7 +8,9 @@ import {
 
 export interface DataType {
   key: string;
-  order: number;
+  orderId: number;
+  email: string;
+  newOrder: boolean;
   status: OrdersStatusEnum;
   type: OrdersTypeEnum;
   paymentType: OrdersPaymentTypeEnum;
