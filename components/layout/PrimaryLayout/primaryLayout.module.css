@@ -1,9 +1,3 @@
-.container {
-  height: 100% !important;
-  width: 100% !important;
-  position: relative !important;
-}
-
 .layout {
   height: 100% !important;
   overflow: auto !important;
@@ -11,6 +5,8 @@
 }
 
 .content {
-  padding: 20px !important;
-  background: white !important;
+  /* padding: 20px !important;
+  background: white !important; */
+  margin: 24px 16px 0 !important;
+  overflow: initial !important;
 }

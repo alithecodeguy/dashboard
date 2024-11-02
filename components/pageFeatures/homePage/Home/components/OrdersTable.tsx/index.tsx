@@ -9,10 +9,16 @@ import type { DataType } from './ordersTableType';
 import { ordersTableColumns } from './ordersTableDef';
 import { ordersTableMockData } from './ordersTableMockData';
 
+// redux
+import { useAppSelector } from '@/libs/redux/hooks';
+import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+
 const OrdersTable: FC = () => {
+  // selectors
+  const isSiderCollapsed = useAppSelector(selectSiderStatus);
   return (
     <Table<DataType>
-      columns={ordersTableColumns}
+      columns={ordersTableColumns(isSiderCollapsed)}
       pagination={{ position: ['none', 'bottomCenter'] }}
       dataSource={ordersTableMockData}
     />

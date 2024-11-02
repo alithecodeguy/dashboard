@@ -19,13 +19,16 @@ import CustomDrawer from './components/CustomDrawer';
 import CustomSider from './components/CustomSider';
 
 // redux
-import { useAppDispatch } from '@/libs/redux/hooks';
-import { setCurrentPath } from '@/libs/redux/slices/sharedSlice';
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
+import { selectSiderStatus, setCurrentPath } from '@/libs/redux/slices/sharedSlice';
 
 const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // hooks
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+
+  // selectors
+  const isSiderCollapsed = useAppSelector(selectSiderStatus);
 
   const logout = () => {
     // TODO: implement logout function
@@ -37,10 +40,10 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   }, [pathname, dispatch]);
 
   return (
-    <Layout className={styles.container}>
+    <Layout hasSider>
       <CustomSider logout={logout} />
       <CustomDrawer logout={logout} />
-      <Layout className={styles.layout}>
+      <Layout style={{ marginInlineStart: isSiderCollapsed ? 0 : 236 }}>
         <LayoutHeader />
         <Content className={styles.content}>{children}</Content>
       </Layout>

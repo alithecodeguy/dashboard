@@ -11,7 +11,7 @@ const { Text } = Typography;
 
 type ColumnsType<T extends object> = TableProps<T>['columns'];
 
-export const ordersTableColumns: ColumnsType<DataType> = [
+export const ordersTableColumns = (isSiderCollapsed: boolean): ColumnsType<DataType> => [
   {
     title: 'Order',
     dataIndex: 'orderId',
@@ -51,30 +51,35 @@ export const ordersTableColumns: ColumnsType<DataType> = [
   {
     title: 'Type',
     dataIndex: 'type',
-    key: 'type'
+    key: 'type',
+    hidden: isSiderCollapsed
   },
   {
     title: 'Payment',
     dataIndex: 'payment',
     key: 'payment',
-    render: (_, record) => `${record.paymentType} / ${record.paymentStatus}`
+    render: (_, record) => `${record.paymentType} / ${record.paymentStatus}`,
+    hidden: isSiderCollapsed
   },
   {
     title: 'Waiter',
     dataIndex: 'waiter',
-    key: 'waiter'
+    key: 'waiter',
+    hidden: isSiderCollapsed
   },
   {
     title: 'Cost',
     dataIndex: 'cost',
     key: 'cost',
-    render: (cost: number) => `€ ${cost.toLocaleString('en')}`
+    render: (cost: number) => `€ ${cost.toLocaleString('en')}`,
+    hidden: isSiderCollapsed
   },
   {
     title: 'Date & Time',
     dataIndex: 'utcDateString',
     key: 'utcDateString',
-    render: (utcDateString: number) => `${new Date(utcDateString).toLocaleString('en')}`
+    render: (utcDateString: number) => `${new Date(utcDateString).toLocaleString('en')}`,
+    hidden: isSiderCollapsed
   },
   {
     title: 'Actions',
@@ -86,34 +91,4 @@ export const ordersTableColumns: ColumnsType<DataType> = [
     dataIndex: 'more',
     key: 'more'
   }
-  //   {
-  //     title: 'Tags',
-  //     key: 'tags',
-  //     dataIndex: 'tags',
-  //     render: (tags: string[]) => (
-  //       <span>
-  //         {tags.map((tag) => {
-  //           let color = tag.length > 5 ? 'geekblue' : 'green';
-  //           if (tag === 'loser') {
-  //             color = 'volcano';
-  //           }
-  //           return (
-  //             <Tag color={color} key={tag}>
-  //               {tag.toUpperCase()}
-  //             </Tag>
-  //           );
-  //         })}
-  //       </span>
-  //     )
-  //   },
-  //   {
-  //     title: 'Action',
-  //     key: 'action',
-  //     render: (_, record) => (
-  //       <Space size="middle">
-  //         <a>Invite {record.name}</a>
-  //         <a>Delete</a>
-  //       </Space>
-  //     )
-  //   }
 ];
