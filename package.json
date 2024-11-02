@@ -1,6 +1,6 @@
 {
-  "name": "charisma_gift_admin",
-  "version": "0.2.4",
+  "name": "digimenue",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3080",
