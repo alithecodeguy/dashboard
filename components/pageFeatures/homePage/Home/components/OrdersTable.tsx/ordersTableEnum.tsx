@@ -1,13 +1,13 @@
 export enum OrdersStatusEnum {
-  PENDING,
-  REJECT,
-  CONFIRM
+  PENDING = 'Pending',
+  REJECT = 'Reject',
+  CONFIRM = 'Confirm'
 }
 
 export enum OrdersTypeEnum {
-  AT_RESTAURANT,
-  PICKUP,
-  AT_HOME
+  AT_RESTAURANT = 'At Restaurant',
+  PICKUP = 'Pickup',
+  AT_HOME = 'At Home'
 }
 
 export enum OrdersPaymentTypeEnum {

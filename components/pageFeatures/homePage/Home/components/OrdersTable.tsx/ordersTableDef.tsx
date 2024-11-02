@@ -4,6 +4,7 @@ import { Flex, Space, Tag, Typography } from 'antd';
 // types
 import type { TableProps } from 'antd';
 import type { DataType } from './ordersTableType';
+import { OrdersStatusEnum } from './ordersTableEnum';
 
 // destrcuture
 const { Text } = Typography;
@@ -15,13 +16,16 @@ export const ordersTableColumns: ColumnsType<DataType> = [
     title: 'Order',
     dataIndex: 'orderId',
     key: 'orderId',
-    render: (orderId, record) => {
-      console.log(record);
+    render: (_, record) => {
       return (
         <Flex vertical>
-          <Text>
-            {record.newOrder ? '(New)' : ''} #{record.orderId}
-          </Text>
+          <Flex align="center" gap={8}>
+            {record.newOrder && (
+              <div style={{ height: 6, width: 6, borderRadius: '100%', background: 'red' }}></div>
+            )}
+
+            <Text strong>#{record.orderId}</Text>
+          </Flex>
           <Text>{record.email}</Text>
         </Flex>
       );
@@ -30,7 +34,19 @@ export const ordersTableColumns: ColumnsType<DataType> = [
   {
     title: 'Status',
     dataIndex: 'status',
-    key: 'status'
+    key: 'status',
+    render: (_, record) => {
+      if (record.status === OrdersStatusEnum.CONFIRM) {
+        return <Tag color={'green'}>{record.status}</Tag>;
+      }
+      if (record.status === OrdersStatusEnum.PENDING) {
+        return <Tag color={'orange'}>{record.status}</Tag>;
+      }
+      if (record.status === OrdersStatusEnum.REJECT) {
+        return <Tag color={'red'}>{record.status}</Tag>;
+      }
+      return '';
+    }
   },
   {
     title: 'Type',
