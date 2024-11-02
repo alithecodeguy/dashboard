@@ -1,6 +1,6 @@
 export const routes = {
   ORDERS: '/',
-  RESERVATION: '/reservation',
+  RESERVATIONS: '/reservations',
   RESERVATION_SETTING: '/reservation-setting',
   TABLES_SETTING: '/tables-setting',
   CATEGORIES: '/categories',

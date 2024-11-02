@@ -32,8 +32,8 @@ function getItem(label: ReactNode, key: Key, icon?: ReactNode, children?: MenuIt
 export const dashboardItems: MenuItem[] = [
   getItem('Orders', routes.ORDERS, <ShoppingFilled className="custom-menu-item-icon-size" />),
   getItem(
-    'Reservation',
-    routes.RESERVATION,
+    'Reservations',
+    routes.RESERVATIONS,
     <CalendarFilled className="custom-menu-item-icon-size" />
   ),
   getItem('Food Menu', '/food-menu', <ReadFilled className="custom-menu-item-icon-size" />, [

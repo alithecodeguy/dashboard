@@ -18,7 +18,7 @@ import usePageTitle from '@/hooks/usePageTitle';
 // destructure
 const { Text } = Typography;
 
-const Reservation: FC = () => {
+const Reservations: FC = () => {
   // hooks
   const pageTitle = usePageTitle();
 
@@ -39,7 +39,7 @@ const Reservation: FC = () => {
             </Flex>
           </Flex>
           <Flex vertical gap={24} style={{ background: 'red' }}>
-            settings
+            Reservations
           </Flex>
         </Flex>
       </Col>
@@ -47,4 +47,4 @@ const Reservation: FC = () => {
   );
 };
 
-export default Reservation;
+export default Reservations;
