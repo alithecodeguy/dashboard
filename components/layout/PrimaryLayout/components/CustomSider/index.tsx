@@ -41,7 +41,7 @@ const CustomSider: FC<{
     <Sider
       theme="light"
       width={236}
-      breakpoint="lg"
+      breakpoint="xxl"
       collapsedWidth="0"
       collapsible
       collapsed={isSiderCollapsed}

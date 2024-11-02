@@ -11,14 +11,15 @@ import { ordersTableMockData } from './ordersTableMockData';
 
 // redux
 import { useAppSelector } from '@/libs/redux/hooks';
-import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
 
 const OrdersTable: FC = () => {
   // selectors
-  const isSiderCollapsed = useAppSelector(selectSiderStatus);
+  const pageSize = useAppSelector(selectPageSize);
+
   return (
     <Table<DataType>
-      columns={ordersTableColumns(isSiderCollapsed)}
+      columns={ordersTableColumns(pageSize!)}
       pagination={{ position: ['none', 'bottomCenter'] }}
       dataSource={ordersTableMockData}
     />

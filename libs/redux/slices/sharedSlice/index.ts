@@ -7,6 +7,9 @@ import type { RootState } from '../../store';
 // initial state
 import { sharedSliceInitialState } from './sharedSliceInitialState';
 
+// enums
+import { PageSizeEnum } from './sharedSliceEnum';
+
 const sharedSlice = createSlice({
   name: 'shared',
   initialState: sharedSliceInitialState,
@@ -40,6 +43,9 @@ const sharedSlice = createSlice({
     // action to set the current path
     setCurrentPath(state, action: PayloadAction<string>) {
       state.currentPath = [action.payload];
+    },
+    setPageSize(state, action: PayloadAction<PageSizeEnum>) {
+      state.pageSize = action.payload;
     }
   }
 });
@@ -54,13 +60,15 @@ export const {
   openDrawer,
   changeDrawerStatus,
   toggleDrawerStatus,
-  setCurrentPath
+  setCurrentPath,
+  setPageSize
 } = sharedSlice.actions;
 
 // selector
 export const selectSiderStatus = (state: RootState) => state.shared.isSiderCollapsed;
 export const selectDrawerStatus = (state: RootState) => state.shared.isDrawerClosed;
 export const selectCurrentPath = (state: RootState) => state.shared.currentPath;
+export const selectPageSize = (state: RootState) => state.shared.pageSize;
 
 // reducer
 export default sharedSlice.reducer;

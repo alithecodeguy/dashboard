@@ -2,7 +2,7 @@
 import type { FC, ReactNode } from 'react';
 
 // libraries
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Content } from 'antd/lib/layout/layout';
 import { usePathname } from 'next/navigation';
 import { Layout } from 'antd';
@@ -20,9 +20,16 @@ import CustomSider from './components/CustomSider';
 
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
-import { selectSiderStatus, setCurrentPath } from '@/libs/redux/slices/sharedSlice';
+import { selectSiderStatus, setCurrentPath, setPageSize } from '@/libs/redux/slices/sharedSlice';
+
+// enums
+import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
 
 const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
+  if (typeof document === 'undefined') {
+    React.useLayoutEffect = React.useEffect;
+  }
+
   // hooks
   const pathname = usePathname();
   const dispatch = useAppDispatch();
@@ -37,6 +44,25 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
   // side effects
   useEffect(() => {
     dispatch(setCurrentPath(pathname));
+
+    const handleResize = () => {
+      if (window.innerWidth) {
+        if (window.innerWidth >= 1280) {
+          dispatch(setPageSize(PageSizeEnum.LG));
+        } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+          dispatch(setPageSize(PageSizeEnum.MD));
+        } else {
+          dispatch(setPageSize(PageSizeEnum.SM));
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [pathname, dispatch]);
 
   return (

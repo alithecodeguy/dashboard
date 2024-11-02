@@ -1,3 +1,6 @@
+// enums
+import { PageSizeEnum } from './sharedSliceEnum';
+
 export interface sharedSliceInterface {
   // to detect if sider is close or not
   isSiderCollapsed: boolean;
@@ -5,4 +8,6 @@ export interface sharedSliceInterface {
   isDrawerClosed: boolean;
   // to detect current path
   currentPath: string[] | undefined;
+  // page size
+  pageSize: PageSizeEnum | undefined;
 }
