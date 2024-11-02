@@ -15,6 +15,9 @@ import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
 // hooks
 import usePageTitle from '@/hooks/usePageTitle';
 
+// components
+import OrdersTable from './components/OrdersTable.tsx';
+
 // destructure
 const { Text } = Typography;
 
@@ -29,7 +32,7 @@ const Home: FC = () => {
     {
       key: '1',
       label: 'All Orders',
-      children: 'Content of All Orders'
+      children: <OrdersTable />
     },
     {
       key: '2',
