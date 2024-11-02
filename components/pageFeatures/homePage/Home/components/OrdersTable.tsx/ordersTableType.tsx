@@ -11,8 +11,9 @@ export interface DataType {
   order: number;
   status: OrdersStatusEnum;
   type: OrdersTypeEnum;
-  payment: [OrdersPaymentTypeEnum, OrdersPaymentStatusEnum];
+  paymentType: OrdersPaymentTypeEnum;
+  paymentStatus: OrdersPaymentStatusEnum;
   waiter: string;
   cost: number;
-  utcDate: string;
+  utcDateString: string;
 }

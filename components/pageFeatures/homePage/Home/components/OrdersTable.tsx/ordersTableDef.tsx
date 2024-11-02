@@ -22,6 +22,39 @@ export const ordersTableColumns: ColumnsType<DataType> = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type'
+  },
+  {
+    title: 'Payment',
+    dataIndex: 'payment',
+    key: 'payment',
+    render: (_, record) => `${record.paymentType} / ${record.paymentStatus}`
+  },
+  {
+    title: 'Waiter',
+    dataIndex: 'waiter',
+    key: 'waiter'
+  },
+  {
+    title: 'Cost',
+    dataIndex: 'cost',
+    key: 'cost',
+    render: (cost: number) => `€ ${cost.toLocaleString('en')}`
+  },
+  {
+    title: 'Date & Time',
+    dataIndex: 'utcDateString',
+    key: 'utcDateString',
+    render: (utcDateString: number) => `${new Date(utcDateString).toLocaleString('en')}`
+  },
+  {
+    title: 'Actions',
+    dataIndex: 'actions',
+    key: 'actions'
+  },
+  {
+    title: 'More',
+    dataIndex: 'more',
+    key: 'more'
   }
   //   {
   //     title: 'Tags',
