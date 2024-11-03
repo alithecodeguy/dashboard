@@ -30,10 +30,16 @@ const OrdersTable: FC = () => {
         expandedRowRender: (record) => (
           <Flex vertical>
             {pageSize === PageSizeEnum.SM && (
-              <Flex gap={8}>
-                <Text strong>Type:</Text>
-                <Text>{record.type}</Text>
-              </Flex>
+              <>
+                <Flex gap={8}>
+                  <Text strong>Email:</Text>
+                  <Text>{record.email}</Text>
+                </Flex>
+                <Flex gap={8}>
+                  <Text strong>Type:</Text>
+                  <Text>{record.type}</Text>
+                </Flex>
+              </>
             )}
             {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
               <>

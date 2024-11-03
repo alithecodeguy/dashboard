@@ -1,6 +1,6 @@
 # Dimenu Dashboard
 
-## Please only use npm (not yarn or pnpm)
+## Please only use yarn (not npm or pnpm)
 
 ## Please don't use "any" type
 
@@ -9,12 +9,12 @@
 Run the development server:
 
 ```bash
-npm run dev
+yarn run dev
 ```
 
 Commit changes like this:
 
 ```bash
 git add .
-npm run commit
+yarn run commit
 ```

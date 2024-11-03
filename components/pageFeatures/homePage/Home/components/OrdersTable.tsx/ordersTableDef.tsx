@@ -39,11 +39,9 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
       return (
         <Flex vertical>
           <Flex align="center" gap={8}>
-            {record.newOrder && (
-              <div style={{ height: 6, width: 6, borderRadius: '100%', background: 'red' }}></div>
-            )}
-
-            <Text strong>#{record.orderId}</Text>
+            <Text strong style={{ color: record.newOrder ? 'blue' : 'initial' }}>
+              #{record.orderId}
+            </Text>
           </Flex>
           {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>}
         </Flex>
