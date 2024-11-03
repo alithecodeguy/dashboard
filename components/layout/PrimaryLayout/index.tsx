@@ -53,9 +53,9 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     dispatch(setCurrentPath(pathname));
 
     const handleResize = () => {
-      if (window.innerWidth >= 1280) {
+      if (window.innerWidth >= 1200) {
         dispatch(setPageSize(PageSizeEnum.LG));
-      } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+      } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
         dispatch(setPageSize(PageSizeEnum.MD));
       } else {
         dispatch(setPageSize(PageSizeEnum.SM));
@@ -78,7 +78,7 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     <Layout hasSider>
       <CustomSider logout={logout} />
       <CustomDrawer logout={logout} />
-      <Layout style={{ marginInlineStart: isSiderCollapsed ? 0 : 236 }}>
+      <Layout style={{ marginInlineStart: isSiderCollapsed ? 0 : 236, background: '#FFF' }}>
         <LayoutHeader />
         <Content className={styles.content}>{children}</Content>
       </Layout>

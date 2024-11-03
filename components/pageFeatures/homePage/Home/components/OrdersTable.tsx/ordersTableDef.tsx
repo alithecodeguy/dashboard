@@ -1,12 +1,28 @@
 // libraries
-import { Flex, Tag, Typography } from 'antd';
+import { Button, Flex, Tag, Typography } from 'antd';
+import { MdDeliveryDining } from 'react-icons/md';
+import { FaHome } from 'react-icons/fa';
+import { IoRestaurant } from 'react-icons/io5';
+import { FaPersonArrowUpFromLine } from 'react-icons/fa6';
+import { TfiWorld } from 'react-icons/tfi';
+import { FaRegCircleCheck } from 'react-icons/fa6';
+import { FaRegCircleXmark } from 'react-icons/fa6';
+import { FaStoreAlt } from 'react-icons/fa';
+import { IoShareSocialOutline } from 'react-icons/io5';
+import { IoPrintSharp } from 'react-icons/io5';
+import { IoMdArchive } from 'react-icons/io';
 
 // types
 import type { TableProps } from 'antd';
 import type { DataType } from './ordersTableType';
 
 // enums
-import { OrdersStatusEnum } from './ordersTableEnum';
+import {
+  OrdersPaymentStatusEnum,
+  OrdersPaymentTypeEnum,
+  OrdersStatusEnum,
+  OrdersTypeEnum
+} from './ordersTableEnum';
 import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
 
 // destrcuture
@@ -29,7 +45,7 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
 
             <Text strong>#{record.orderId}</Text>
           </Flex>
-          <Text>{record.email}</Text>
+          {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>}
         </Flex>
       );
     }
@@ -55,14 +71,71 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    hidden: pageSize === PageSizeEnum.SM
+    hidden: pageSize === PageSizeEnum.SM,
+    render: (_, record) => {
+      if (record.type === OrdersTypeEnum.PICKUP) {
+        return (
+          <Flex gap={8} align="center">
+            <MdDeliveryDining size={28} />
+            <span>{record.type}</span>
+          </Flex>
+        );
+      } else if (record.type === OrdersTypeEnum.AT_HOME) {
+        return (
+          <Flex gap={8} align="center">
+            <FaHome size={20} />
+            <span>{record.type}</span>
+          </Flex>
+        );
+      } else if (record.type === OrdersTypeEnum.AT_RESTAURANT) {
+        return (
+          <Flex gap={8} align="center">
+            <IoRestaurant size={18} />
+            <span>{record.type}</span>
+          </Flex>
+        );
+      } else if (record.type === OrdersTypeEnum.IN_STORE_PICKUP) {
+        return (
+          <Flex gap={8} align="center">
+            <FaPersonArrowUpFromLine size={24} />
+            <span>{record.type}</span>
+          </Flex>
+        );
+      }
+      return record.type;
+    }
   },
   {
     title: 'Payment',
     dataIndex: 'payment',
     key: 'payment',
-    render: (_, record) => `${record.paymentType} / ${record.paymentStatus}`,
-    hidden: pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM
+    hidden: pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM,
+    render: (_, record) => (
+      <Flex vertical align="start" justify="center">
+        {record.paymentType === OrdersPaymentTypeEnum.ONLINE ? (
+          <Flex gap={8} align="center">
+            <TfiWorld size={16} />
+            {record.paymentType}
+          </Flex>
+        ) : (
+          <Flex gap={8} align="center">
+            <FaStoreAlt size={16} />
+            {record.paymentType}
+          </Flex>
+        )}
+        {record.paymentStatus === OrdersPaymentStatusEnum.PAID ? (
+          <Flex gap={8} align="center" style={{ color: 'green' }}>
+            <FaRegCircleCheck size={16} />
+            {record.paymentStatus}
+          </Flex>
+        ) : (
+          <Flex gap={8} align="center" style={{ color: 'red' }}>
+            <FaRegCircleXmark size={16} />
+            {record.paymentStatus}
+          </Flex>
+        )}
+      </Flex>
+    )
   },
   {
     title: 'Waiter',
@@ -87,11 +160,23 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
   {
     title: 'Actions',
     dataIndex: 'actions',
-    key: 'actions'
+    key: 'actions',
+    render: (_, record) => (
+      <Flex gap={12}>
+        <IoShareSocialOutline size={20} />
+        <IoPrintSharp size={20} />
+        <IoMdArchive size={20} />
+      </Flex>
+    )
   },
   {
     title: 'More',
     dataIndex: 'more',
-    key: 'more'
+    key: 'more',
+    render: () => (
+      <Button type="link" style={{ paddingLeft: 0 }}>
+        See Details
+      </Button>
+    )
   }
 ];
