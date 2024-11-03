@@ -53,9 +53,9 @@ const PrimaryLayout: FC<{ children: ReactNode }> = ({ children }) => {
     dispatch(setCurrentPath(pathname));
 
     const handleResize = () => {
-      if (window.innerWidth >= 1200) {
+      if (window.innerWidth >= 1280) {
         dispatch(setPageSize(PageSizeEnum.LG));
-      } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+      } else if (window.innerWidth >= 768 && window.innerWidth < 1280) {
         dispatch(setPageSize(PageSizeEnum.MD));
       } else {
         dispatch(setPageSize(PageSizeEnum.SM));

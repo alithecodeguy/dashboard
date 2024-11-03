@@ -163,9 +163,9 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
     key: 'actions',
     render: (_, record) => (
       <Flex gap={12}>
-        <IoShareSocialOutline size={20} />
-        <IoPrintSharp size={20} />
-        <IoMdArchive size={20} />
+        <IoShareSocialOutline size={20} style={{ cursor: 'pointer' }} />
+        <IoPrintSharp size={20} style={{ cursor: 'pointer' }} />
+        <IoMdArchive size={20} style={{ cursor: 'pointer' }} />
       </Flex>
     )
   },
@@ -173,6 +173,7 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
     title: 'More',
     dataIndex: 'more',
     key: 'more',
+    hidden: pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM,
     render: () => (
       <Button type="link" style={{ paddingLeft: 0 }}>
         See Details
