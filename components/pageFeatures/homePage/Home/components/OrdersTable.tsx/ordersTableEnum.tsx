@@ -1,3 +1,11 @@
+export enum OrdersFilterEnum {
+  ALL = 'All',
+  NEW = 'New',
+  AT_RESTAURANT = 'At_Restaurant',
+  AT_HOME = 'At_Home',
+  ARCHIVED = 'Archived'
+}
+
 export enum OrdersStatusEnum {
   PENDING = 'Pending',
   REJECT = 'Reject',

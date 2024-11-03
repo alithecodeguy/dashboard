@@ -163,7 +163,7 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
       <Flex gap={12}>
         <IoShareSocialOutline size={20} style={{ cursor: 'pointer' }} />
         <IoPrintSharp size={20} style={{ cursor: 'pointer' }} />
-        <IoMdArchive size={20} style={{ cursor: 'pointer' }} />
+        {!record.archived && <IoMdArchive size={20} style={{ cursor: 'pointer' }} />}
       </Flex>
     )
   },

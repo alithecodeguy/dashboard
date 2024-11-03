@@ -18,4 +18,5 @@ export interface DataType {
   waiter: string;
   cost: number;
   utcDateString: string;
+  archived: boolean;
 }

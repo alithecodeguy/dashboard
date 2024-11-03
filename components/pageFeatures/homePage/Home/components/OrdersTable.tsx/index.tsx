@@ -12,20 +12,47 @@ import { ordersTableMockData } from './ordersTableMockData';
 // redux
 import { useAppSelector } from '@/libs/redux/hooks';
 import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
+
+// enums
 import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
+import { OrdersFilterEnum, OrdersTypeEnum } from './ordersTableEnum';
 
 // destructure
 const { Text } = Typography;
 
-const OrdersTable: FC = () => {
+const OrdersTable: FC<{ ordersFilter: OrdersFilterEnum }> = ({ ordersFilter }) => {
   // selectors
   const pageSize = useAppSelector(selectPageSize);
+
+  let filteredData = ordersTableMockData;
+
+  if (ordersFilter === OrdersFilterEnum.ALL) {
+    filteredData = ordersTableMockData;
+  }
+
+  if (ordersFilter === OrdersFilterEnum.NEW) {
+    filteredData = ordersTableMockData.filter((order) => order.newOrder);
+  }
+
+  if (ordersFilter === OrdersFilterEnum.AT_RESTAURANT) {
+    filteredData = ordersTableMockData.filter(
+      (order) => order.type === OrdersTypeEnum.AT_RESTAURANT
+    );
+  }
+
+  if (ordersFilter === OrdersFilterEnum.AT_HOME) {
+    filteredData = ordersTableMockData.filter((order) => order.type === OrdersTypeEnum.AT_HOME);
+  }
+
+  if (ordersFilter === OrdersFilterEnum.ARCHIVED) {
+    filteredData = ordersTableMockData.filter((order) => order.archived);
+  }
 
   return (
     <Table<DataType>
       columns={ordersTableColumns(pageSize!)}
       pagination={{ position: ['none', 'bottomCenter'] }}
-      dataSource={ordersTableMockData}
+      dataSource={filteredData}
       expandable={{
         expandedRowRender: (record) => (
           <Flex vertical>

@@ -19,7 +19,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.UNPAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '2',
@@ -32,7 +33,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '3',
@@ -45,7 +47,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '4',
@@ -58,7 +61,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '5',
@@ -71,7 +75,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '6',
@@ -84,7 +89,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '7',
@@ -97,7 +103,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '8',
@@ -110,7 +117,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '9',
@@ -123,7 +131,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '10',
@@ -136,7 +145,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: true
   },
   {
     key: '11',
@@ -149,7 +159,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: true
   },
   {
     key: '12',
@@ -162,7 +173,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: true
   },
   {
     key: '13',
@@ -175,7 +187,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: true
   },
   {
     key: '14',
@@ -188,7 +201,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '15',
@@ -201,7 +215,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '16',
@@ -214,7 +229,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '17',
@@ -227,7 +243,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '18',
@@ -240,7 +257,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '19',
@@ -253,7 +271,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '20',
@@ -266,7 +285,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '21',
@@ -279,7 +299,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '22',
@@ -292,7 +313,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '23',
@@ -305,7 +327,8 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   },
   {
     key: '24',
@@ -318,6 +341,7 @@ export const ordersTableMockData: DataType[] = [
     paymentStatus: OrdersPaymentStatusEnum.PAID,
     waiter: 'David',
     cost: 2000,
-    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT'
+    utcDateString: 'Sat, 02 Nov 2024 07:00:42 GMT',
+    archived: false
   }
 ];

@@ -18,6 +18,9 @@ import usePageTitle from '@/hooks/usePageTitle';
 // components
 import OrdersTable from './components/OrdersTable.tsx';
 
+// enums
+import { OrdersFilterEnum } from './components/OrdersTable.tsx/ordersTableEnum.tsx';
+
 // destructure
 const { Text } = Typography;
 
@@ -30,29 +33,29 @@ const Home: FC = () => {
 
   const items: TabsProps['items'] = [
     {
-      key: '1',
-      label: 'All Orders',
-      children: <OrdersTable />
+      key: OrdersFilterEnum.ALL,
+      label: OrdersFilterEnum.ALL,
+      children: <OrdersTable ordersFilter={OrdersFilterEnum.ALL} />
     },
     {
-      key: '2',
-      label: 'New Orders',
-      children: 'Content of New Orders'
+      key: OrdersFilterEnum.NEW,
+      label: OrdersFilterEnum.NEW,
+      children: <OrdersTable ordersFilter={OrdersFilterEnum.NEW} />
     },
     {
-      key: '3',
-      label: 'At Restaurant',
-      children: 'Content of At Restaurant'
+      key: OrdersFilterEnum.AT_RESTAURANT,
+      label: OrdersFilterEnum.AT_RESTAURANT.replace('_', ' '),
+      children: <OrdersTable ordersFilter={OrdersFilterEnum.AT_RESTAURANT} />
     },
     {
-      key: '4',
-      label: 'At Home',
-      children: 'Content of At Home'
+      key: OrdersFilterEnum.AT_HOME,
+      label: OrdersFilterEnum.AT_HOME.replace('_', ' '),
+      children: <OrdersTable ordersFilter={OrdersFilterEnum.AT_HOME} />
     },
     {
-      key: '5',
-      label: 'Archived',
-      children: 'Content of Archived'
+      key: OrdersFilterEnum.ARCHIVED,
+      label: OrdersFilterEnum.ARCHIVED,
+      children: <OrdersTable ordersFilter={OrdersFilterEnum.ARCHIVED} />
     }
   ];
 
