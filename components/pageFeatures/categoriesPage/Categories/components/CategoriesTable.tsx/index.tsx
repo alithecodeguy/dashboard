@@ -9,7 +9,8 @@ import {
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Table } from 'antd';
+import { Modal, Table } from 'antd';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 // types
 import type { CSSProperties, FC } from 'react';
@@ -28,6 +29,10 @@ import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
 
 // components
 import AddNewCategoryModal from './components/AddNewCategoryModal';
+import EditCategoryModal from './components/EditCategoryModal';
+
+// destructure
+const { confirm } = Modal;
 
 interface RowContextProps {
   setActivatorNodeRef?: (element: HTMLElement | null) => void;
@@ -68,6 +73,23 @@ const Row: FC<RowProps> = (props) => {
       <tr {...props} ref={setNodeRef} style={style} {...attributes} />
     </RowContext.Provider>
   );
+};
+
+const showDeleteConfirm = () => {
+  confirm({
+    title: 'Are you sure delete this task?',
+    icon: <ExclamationCircleFilled />,
+    content: 'Some descriptions',
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      console.log('OK');
+    },
+    onCancel() {
+      console.log('Cancel');
+    }
+  });
 };
 
 const CategoriesTable: FC<{ categoriesFilter: CategoriesFilterEnum }> = ({ categoriesFilter }) => {
@@ -114,12 +136,13 @@ const CategoriesTable: FC<{ categoriesFilter: CategoriesFilterEnum }> = ({ categ
             // rowKey="key"
             pagination={{ position: ['none', 'bottomCenter'] }}
             components={{ body: { row: Row } }}
-            columns={categoriesTableColumns(pageSize!)}
+            columns={categoriesTableColumns(pageSize!, showDeleteConfirm)}
             dataSource={filteredData}
           />
         </SortableContext>
       </DndContext>
       <AddNewCategoryModal />
+      <EditCategoryModal />
     </>
   );
 };

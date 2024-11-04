@@ -2,5 +2,6 @@
 import type { categoriesSliceInterface } from './categoriesSliceTypes';
 
 export const categoriesSliceInitialState: categoriesSliceInterface = {
-  addNewCategoryModalStatus: false
+  addNewCategoryModalStatus: false,
+  editCategoryModalStatus: false
 };

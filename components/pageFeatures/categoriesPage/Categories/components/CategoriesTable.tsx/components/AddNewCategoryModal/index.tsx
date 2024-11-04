@@ -20,9 +20,9 @@ const AddNewCategoryModal: FC = () => {
   const addNewCategoryModalStatus = useAppSelector(selectAddNewCategoryModalStatus);
   return (
     <Modal
-      title="Basic Modal"
+      title="AddNewCategoryModal"
       open={addNewCategoryModalStatus}
-      onOk={() => dispatch(openAddNewCategoryModalStatus())}
+      onOk={() => dispatch(closeAddNewCategoryModalStatus())}
       onCancel={() => dispatch(closeAddNewCategoryModalStatus())}
     >
       <p>Some contents...</p>

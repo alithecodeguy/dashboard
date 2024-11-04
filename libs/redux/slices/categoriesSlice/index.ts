@@ -22,6 +22,18 @@ const categoriesSlice = createSlice({
     },
     toggleAddNewCategoryModalStatus(state) {
       state.addNewCategoryModalStatus = !state.addNewCategoryModalStatus;
+    },
+    changeEditCategoryModalStatus(state, action: PayloadAction<boolean>) {
+      state.editCategoryModalStatus = action.payload;
+    },
+    closeEditCategoryModalStatus(state) {
+      state.editCategoryModalStatus = false;
+    },
+    openEditCategoryModalStatus(state) {
+      state.editCategoryModalStatus = true;
+    },
+    toggleEditCategoryModalStatus(state) {
+      state.editCategoryModalStatus = !state.editCategoryModalStatus;
     }
   }
 });
@@ -31,12 +43,18 @@ export const {
   changeAddNewCategoryModalStatus,
   closeAddNewCategoryModalStatus,
   openAddNewCategoryModalStatus,
-  toggleAddNewCategoryModalStatus
+  toggleAddNewCategoryModalStatus,
+  changeEditCategoryModalStatus,
+  closeEditCategoryModalStatus,
+  openEditCategoryModalStatus,
+  toggleEditCategoryModalStatus
 } = categoriesSlice.actions;
 
 // selector
 export const selectAddNewCategoryModalStatus = (state: RootState) =>
   state.categories.addNewCategoryModalStatus;
+export const selectEditCategoryModalStatus = (state: RootState) =>
+  state.categories.editCategoryModalStatus;
 
 // reducer
 export default categoriesSlice.reducer;

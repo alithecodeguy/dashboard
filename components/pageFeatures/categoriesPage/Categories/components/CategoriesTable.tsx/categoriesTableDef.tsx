@@ -13,8 +13,14 @@ import type { FC } from 'react';
 
 // enums
 import { CategoryStatusEnum } from './categoriesTableEnum';
-import { RowContext } from '.';
 import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
+
+// context
+import { RowContext } from '.';
+
+// redux
+import { useAppDispatch } from '@/libs/redux/hooks';
+import { openEditCategoryModalStatus } from '@/libs/redux/slices/categoriesSlice';
 
 // destrcuture
 const { Text } = Typography;
@@ -54,16 +60,28 @@ const StatusTag: FC<{ categoryStatus: CategoryStatusEnum }> = ({ categoryStatus 
   return <></>;
 };
 
-const ActionButtons: FC = () => {
+const ActionButtons: FC<{ showDeleteConfirm: () => void }> = ({ showDeleteConfirm }) => {
+  const dispatch = useAppDispatch();
   return (
     <Flex gap={12}>
-      <RiEditFill size={20} style={{ cursor: 'pointer' }} />
-      <RiDeleteBin2Fill size={20} style={{ cursor: 'pointer' }} />
+      <RiEditFill
+        onClick={() => dispatch(openEditCategoryModalStatus())}
+        size={20}
+        style={{ cursor: 'pointer' }}
+      />
+      <RiDeleteBin2Fill
+        onClick={() => showDeleteConfirm()}
+        size={20}
+        style={{ cursor: 'pointer' }}
+      />
     </Flex>
   );
 };
 
-export const categoriesTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType> => [
+export const categoriesTableColumns = (
+  pageSize: PageSizeEnum,
+  showDeleteConfirm: () => void
+): ColumnsType<DataType> => [
   { key: 'sort', align: 'center', width: 80, render: () => <DragHandle /> },
   {
     title: 'Name & Description',
@@ -78,7 +96,7 @@ export const categoriesTableColumns = (pageSize: PageSizeEnum): ColumnsType<Data
           {pageSize === PageSizeEnum.SM && (
             <Flex gap={8}>
               <StatusTag categoryStatus={record.categoryStatus} />
-              <ActionButtons />
+              <ActionButtons showDeleteConfirm={showDeleteConfirm} />
             </Flex>
           )}
         </Flex>
@@ -97,6 +115,6 @@ export const categoriesTableColumns = (pageSize: PageSizeEnum): ColumnsType<Data
     dataIndex: 'actions',
     key: 'actions',
     hidden: pageSize === PageSizeEnum.SM,
-    render: (_, record) => <ActionButtons />
+    render: (_, record) => <ActionButtons showDeleteConfirm={showDeleteConfirm} />
   }
 ];
