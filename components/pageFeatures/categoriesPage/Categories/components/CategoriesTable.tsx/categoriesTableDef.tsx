@@ -20,7 +20,7 @@ import { RowContext } from '.';
 
 // redux
 import { useAppDispatch } from '@/libs/redux/hooks';
-import { openEditCategoryModalStatus } from '@/libs/redux/slices/categoriesSlice';
+import { openEditCategoryDrawerStatus } from '@/libs/redux/slices/categoriesSlice';
 
 // destrcuture
 const { Text } = Typography;
@@ -65,7 +65,7 @@ const ActionButtons: FC<{ showDeleteConfirm: () => void }> = ({ showDeleteConfir
   return (
     <Flex gap={12}>
       <RiEditFill
-        onClick={() => dispatch(openEditCategoryModalStatus())}
+        onClick={() => dispatch(openEditCategoryDrawerStatus())}
         size={20}
         style={{ cursor: 'pointer' }}
       />

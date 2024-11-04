@@ -28,8 +28,8 @@ import { useAppSelector } from '@/libs/redux/hooks';
 import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
 
 // components
-import AddNewCategoryModal from './components/AddNewCategoryModal';
-import EditCategoryModal from './components/EditCategoryModal';
+import AddNewCategoryDrawer from './components/AddNewCategoryDrawer';
+import EditCategoryDrawer from './components/EditCategoryDrawer';
 
 // destructure
 const { confirm } = Modal;
@@ -141,8 +141,8 @@ const CategoriesTable: FC<{ categoriesFilter: CategoriesFilterEnum }> = ({ categ
           />
         </SortableContext>
       </DndContext>
-      <AddNewCategoryModal />
-      <EditCategoryModal />
+      <AddNewCategoryDrawer />
+      <EditCategoryDrawer />
     </>
   );
 };

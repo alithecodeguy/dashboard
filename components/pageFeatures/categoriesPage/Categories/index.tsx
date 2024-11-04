@@ -11,7 +11,7 @@ import styles from './categories.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
-import { openAddNewCategoryModalStatus } from '@/libs/redux/slices/categoriesSlice/index.ts';
+import { openAddNewCategoryDrawerStatus } from '@/libs/redux/slices/categoriesSlice/index.ts';
 
 // hooks
 import usePageTitle from '@/hooks/usePageTitle';
@@ -76,7 +76,7 @@ const Categories: FC = () => {
               />
             </Flex>
             <Button
-              onClick={() => dispatch(openAddNewCategoryModalStatus())}
+              onClick={() => dispatch(openAddNewCategoryDrawerStatus())}
               type="primary"
               size={'large'}
               icon={<PlusCircleFilled />}

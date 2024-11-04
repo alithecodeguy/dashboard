@@ -11,50 +11,50 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState: categoriesSliceInitialState,
   reducers: {
-    changeAddNewCategoryModalStatus(state, action: PayloadAction<boolean>) {
-      state.addNewCategoryModalStatus = action.payload;
+    changeAddNewCategoryDrawerStatus(state, action: PayloadAction<boolean>) {
+      state.addNewCategoryDrawerStatus = action.payload;
     },
-    closeAddNewCategoryModalStatus(state) {
-      state.addNewCategoryModalStatus = false;
+    closeAddNewCategoryDrawerStatus(state) {
+      state.addNewCategoryDrawerStatus = false;
     },
-    openAddNewCategoryModalStatus(state) {
-      state.addNewCategoryModalStatus = true;
+    openAddNewCategoryDrawerStatus(state) {
+      state.addNewCategoryDrawerStatus = true;
     },
-    toggleAddNewCategoryModalStatus(state) {
-      state.addNewCategoryModalStatus = !state.addNewCategoryModalStatus;
+    toggleAddNewCategoryDrawerStatus(state) {
+      state.addNewCategoryDrawerStatus = !state.addNewCategoryDrawerStatus;
     },
-    changeEditCategoryModalStatus(state, action: PayloadAction<boolean>) {
-      state.editCategoryModalStatus = action.payload;
+    changeEditCategoryDrawerStatus(state, action: PayloadAction<boolean>) {
+      state.editCategoryDrawerStatus = action.payload;
     },
-    closeEditCategoryModalStatus(state) {
-      state.editCategoryModalStatus = false;
+    closeEditCategoryDrawerStatus(state) {
+      state.editCategoryDrawerStatus = false;
     },
-    openEditCategoryModalStatus(state) {
-      state.editCategoryModalStatus = true;
+    openEditCategoryDrawerStatus(state) {
+      state.editCategoryDrawerStatus = true;
     },
-    toggleEditCategoryModalStatus(state) {
-      state.editCategoryModalStatus = !state.editCategoryModalStatus;
+    toggleEditCategoryDrawerStatus(state) {
+      state.editCategoryDrawerStatus = !state.editCategoryDrawerStatus;
     }
   }
 });
 
 // actions
 export const {
-  changeAddNewCategoryModalStatus,
-  closeAddNewCategoryModalStatus,
-  openAddNewCategoryModalStatus,
-  toggleAddNewCategoryModalStatus,
-  changeEditCategoryModalStatus,
-  closeEditCategoryModalStatus,
-  openEditCategoryModalStatus,
-  toggleEditCategoryModalStatus
+  changeAddNewCategoryDrawerStatus,
+  closeAddNewCategoryDrawerStatus,
+  openAddNewCategoryDrawerStatus,
+  toggleAddNewCategoryDrawerStatus,
+  changeEditCategoryDrawerStatus,
+  closeEditCategoryDrawerStatus,
+  openEditCategoryDrawerStatus,
+  toggleEditCategoryDrawerStatus
 } = categoriesSlice.actions;
 
 // selector
-export const selectAddNewCategoryModalStatus = (state: RootState) =>
-  state.categories.addNewCategoryModalStatus;
-export const selectEditCategoryModalStatus = (state: RootState) =>
-  state.categories.editCategoryModalStatus;
+export const selectAddNewCategoryDrawerStatus = (state: RootState) =>
+  state.categories.addNewCategoryDrawerStatus;
+export const selectEditCategoryDrawerStatus = (state: RootState) =>
+  state.categories.editCategoryDrawerStatus;
 
 // reducer
 export default categoriesSlice.reducer;
