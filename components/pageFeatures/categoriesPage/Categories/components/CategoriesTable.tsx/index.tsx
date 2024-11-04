@@ -22,6 +22,13 @@ import { categoriesTableMockData } from './categoriesTableMockData';
 import { categoriesTableColumns } from './categoriesTableDef';
 import { CategoriesFilterEnum, CategoryStatusEnum } from './categoriesTableEnum';
 
+// redux
+import { useAppSelector } from '@/libs/redux/hooks';
+import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
+
+// components
+import AddNewCategoryModal from './components/AddNewCategoryModal';
+
 interface RowContextProps {
   setActivatorNodeRef?: (element: HTMLElement | null) => void;
   listeners?: SyntheticListenerMap;
@@ -64,6 +71,10 @@ const Row: FC<RowProps> = (props) => {
 };
 
 const CategoriesTable: FC<{ categoriesFilter: CategoriesFilterEnum }> = ({ categoriesFilter }) => {
+  // selectors
+  const pageSize = useAppSelector(selectPageSize);
+
+  // states
   const [dataSource, setDataSource] = useState<DataType[]>(categoriesTableMockData);
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
@@ -93,20 +104,23 @@ const CategoriesTable: FC<{ categoriesFilter: CategoriesFilterEnum }> = ({ categ
   }
 
   return (
-    <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
-      <SortableContext
-        items={filteredData.map((i) => i.key)}
-        strategy={verticalListSortingStrategy}
-      >
-        <Table<DataType>
-          // rowKey="key"
-          pagination={{ position: ['none', 'bottomCenter'] }}
-          components={{ body: { row: Row } }}
-          columns={categoriesTableColumns()}
-          dataSource={filteredData}
-        />
-      </SortableContext>
-    </DndContext>
+    <>
+      <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
+        <SortableContext
+          items={filteredData.map((i) => i.key)}
+          strategy={verticalListSortingStrategy}
+        >
+          <Table<DataType>
+            // rowKey="key"
+            pagination={{ position: ['none', 'bottomCenter'] }}
+            components={{ body: { row: Row } }}
+            columns={categoriesTableColumns(pageSize!)}
+            dataSource={filteredData}
+          />
+        </SortableContext>
+      </DndContext>
+      <AddNewCategoryModal />
+    </>
   );
 };
 

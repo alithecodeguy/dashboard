@@ -9,8 +9,9 @@ import type { FC } from 'react';
 import styles from './categories.module.css';
 
 // redux
-import { useAppSelector } from '@/libs/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+import { openAddNewCategoryModalStatus } from '@/libs/redux/slices/categoriesSlice/index.ts';
 
 // hooks
 import usePageTitle from '@/hooks/usePageTitle';
@@ -27,6 +28,7 @@ const { Text } = Typography;
 const Categories: FC = () => {
   // hooks
   const pageTitle = usePageTitle();
+  const dispatch = useAppDispatch();
 
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
@@ -73,7 +75,12 @@ const Categories: FC = () => {
                 prefix={<SearchOutlined className={styles.search_input_icon} />}
               />
             </Flex>
-            <Button type="primary" size={'large'} icon={<PlusCircleFilled />}>
+            <Button
+              onClick={() => dispatch(openAddNewCategoryModalStatus())}
+              type="primary"
+              size={'large'}
+              icon={<PlusCircleFilled />}
+            >
               Add Category
             </Button>
           </Flex>
