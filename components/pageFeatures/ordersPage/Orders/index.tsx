@@ -6,7 +6,7 @@ import { SearchOutlined, DownloadOutlined } from '@ant-design/icons';
 import type { FC } from 'react';
 
 // styles
-import styles from './home.module.css';
+import styles from './orders.module.css';
 
 // redux
 import { useAppSelector } from '@/libs/redux/hooks';
@@ -16,7 +16,7 @@ import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
 import usePageTitle from '@/hooks/usePageTitle';
 
 // components
-import OrdersTable from './components/OrdersTable.tsx';
+import OrdersTable from './components/OrdersTable.tsx/index.tsx';
 
 // enums
 import { OrdersFilterEnum } from './components/OrdersTable.tsx/ordersTableEnum.tsx';
@@ -24,7 +24,7 @@ import { OrdersFilterEnum } from './components/OrdersTable.tsx/ordersTableEnum.t
 // destructure
 const { Text } = Typography;
 
-const Home: FC = () => {
+const Orders: FC = () => {
   // hooks
   const pageTitle = usePageTitle();
 
@@ -94,4 +94,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default Orders;

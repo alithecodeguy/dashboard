@@ -2,13 +2,13 @@
 import type { NextPage } from 'next';
 
 // components
-import Home from '@/components/pageFeatures/homePage/Home';
+import Orders from '@/components/pageFeatures/ordersPage/Orders';
 
-const HomePage: NextPage = () => {
-  return <Home />;
+const OrdersPage: NextPage = () => {
+  return <Orders />;
 };
 
-export default HomePage;
+export default OrdersPage;
 
 export async function getStaticProps() {
   return {

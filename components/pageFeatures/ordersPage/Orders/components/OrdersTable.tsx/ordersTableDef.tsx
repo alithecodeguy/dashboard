@@ -30,7 +30,10 @@ const { Text } = Typography;
 
 type ColumnsType<T extends object> = TableProps<T>['columns'];
 
-export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType> => [
+export const ordersTableColumns = (
+  pageSize: PageSizeEnum,
+  openDetailsDrawer: () => void
+): ColumnsType<DataType> => [
   {
     title: 'Order',
     dataIndex: 'orderId',
@@ -173,7 +176,7 @@ export const ordersTableColumns = (pageSize: PageSizeEnum): ColumnsType<DataType
     key: 'more',
     hidden: pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM,
     render: () => (
-      <Button type="link" style={{ paddingLeft: 0 }}>
+      <Button onClick={() => openDetailsDrawer()} type="link" style={{ paddingLeft: 0 }}>
         See Details
       </Button>
     )
