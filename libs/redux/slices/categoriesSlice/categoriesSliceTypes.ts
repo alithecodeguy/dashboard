@@ -3,4 +3,6 @@ export interface categoriesSliceInterface {
   addNewCategoryDrawerStatus: boolean;
   // to detect if "edit category modal" is open or not
   editCategoryDrawerStatus: boolean;
+  // to detect which category will edit
+  categoryIdToEdit: number | undefined;
 }

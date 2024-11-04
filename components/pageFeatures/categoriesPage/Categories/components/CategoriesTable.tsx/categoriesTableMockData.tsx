@@ -18,7 +18,7 @@ export const categoriesTableMockData: DataType[] = [
     key: '2',
     categoryId: Math.ceil(Math.random() * 4000),
     imageUrl: '/assets/images/png/sample_food_category2.png',
-    categoryTitle: 'Appetizers',
+    categoryTitle: 'Salad',
     categoryDescription:
       'Appetizers are small dishes served before the main course to stimulate the appetite.',
     categoryStatus: CategoryStatusEnum.DEACTIVE

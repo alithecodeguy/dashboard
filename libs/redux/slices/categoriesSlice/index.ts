@@ -34,6 +34,12 @@ const categoriesSlice = createSlice({
     },
     toggleEditCategoryDrawerStatus(state) {
       state.editCategoryDrawerStatus = !state.editCategoryDrawerStatus;
+    },
+    changeEditableCategoryId(state, action: PayloadAction<number>) {
+      state.categoryIdToEdit = action.payload;
+    },
+    clearEditableCategoryId(state) {
+      state.categoryIdToEdit = undefined;
     }
   }
 });
@@ -47,7 +53,9 @@ export const {
   changeEditCategoryDrawerStatus,
   closeEditCategoryDrawerStatus,
   openEditCategoryDrawerStatus,
-  toggleEditCategoryDrawerStatus
+  toggleEditCategoryDrawerStatus,
+  changeEditableCategoryId,
+  clearEditableCategoryId
 } = categoriesSlice.actions;
 
 // selector
@@ -55,6 +63,7 @@ export const selectAddNewCategoryDrawerStatus = (state: RootState) =>
   state.categories.addNewCategoryDrawerStatus;
 export const selectEditCategoryDrawerStatus = (state: RootState) =>
   state.categories.editCategoryDrawerStatus;
+export const selectEditableCategoryId = (state: RootState) => state.categories.categoryIdToEdit;
 
 // reducer
 export default categoriesSlice.reducer;

@@ -20,7 +20,10 @@ import { RowContext } from '.';
 
 // redux
 import { useAppDispatch } from '@/libs/redux/hooks';
-import { openEditCategoryDrawerStatus } from '@/libs/redux/slices/categoriesSlice';
+import {
+  changeEditableCategoryId,
+  openEditCategoryDrawerStatus
+} from '@/libs/redux/slices/categoriesSlice';
 
 // destrcuture
 const { Text } = Typography;
@@ -60,12 +63,18 @@ const StatusTag: FC<{ categoryStatus: CategoryStatusEnum }> = ({ categoryStatus 
   return <></>;
 };
 
-const ActionButtons: FC<{ showDeleteConfirm: () => void }> = ({ showDeleteConfirm }) => {
+const ActionButtons: FC<{ showDeleteConfirm: () => void; categoryId: number }> = ({
+  showDeleteConfirm,
+  categoryId
+}) => {
   const dispatch = useAppDispatch();
   return (
     <Flex gap={12}>
       <RiEditFill
-        onClick={() => dispatch(openEditCategoryDrawerStatus())}
+        onClick={() => {
+          dispatch(openEditCategoryDrawerStatus());
+          dispatch(changeEditableCategoryId(categoryId));
+        }}
         size={20}
         style={{ cursor: 'pointer' }}
       />
@@ -96,7 +105,7 @@ export const categoriesTableColumns = (
           {pageSize === PageSizeEnum.SM && (
             <Flex gap={8}>
               <StatusTag categoryStatus={record.categoryStatus} />
-              <ActionButtons showDeleteConfirm={showDeleteConfirm} />
+              <ActionButtons showDeleteConfirm={showDeleteConfirm} categoryId={record.categoryId} />
             </Flex>
           )}
         </Flex>
@@ -115,6 +124,8 @@ export const categoriesTableColumns = (
     dataIndex: 'actions',
     key: 'actions',
     hidden: pageSize === PageSizeEnum.SM,
-    render: (_, record) => <ActionButtons showDeleteConfirm={showDeleteConfirm} />
+    render: (_, record) => (
+      <ActionButtons showDeleteConfirm={showDeleteConfirm} categoryId={record.categoryId} />
+    )
   }
 ];

@@ -7,20 +7,35 @@ import {
 
 // libraries
 import { Drawer } from 'antd';
+import { useRef } from 'react';
+import { Button, Col, Form, Input, Row, Select, Space } from 'antd';
 
 // types
-import type { FC } from 'react';
-
-import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from 'antd';
+import { type FC } from 'react';
+import { type FormInstance } from 'antd';
 
 const { Option } = Select;
 
 const AddNewCategoryDrawer: FC = () => {
+  // ref
+  const formRef = useRef<FormInstance>(null);
+
   // hooks
   const dispatch = useAppDispatch();
 
   // selectors
   const addNewCategoryDrawerStatus = useAppSelector(selectAddNewCategoryDrawerStatus);
+
+  const onFinish = (values: any) => {
+    // Handle the form submission logic here
+    console.log('Received values of form: ', values);
+    dispatch(closeAddNewCategoryDrawerStatus());
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
     <Drawer
       title="Add new food category"
@@ -35,87 +50,26 @@ const AddNewCategoryDrawer: FC = () => {
       extra={
         <Space>
           <Button onClick={() => dispatch(closeAddNewCategoryDrawerStatus())}>Cancel</Button>
-          <Button onClick={() => dispatch(closeAddNewCategoryDrawerStatus())} type="primary">
-            Submit
+          <Button
+            onClick={() => {
+              formRef.current?.validateFields().then(onFinish).catch(onFinishFailed);
+            }}
+            type="primary"
+          >
+            Add
           </Button>
         </Space>
       }
     >
-      <Form layout="vertical" hideRequiredMark>
+      <Form ref={formRef} onFinish={onFinish} onFinishFailed={onFinishFailed} layout="vertical">
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               name="name"
-              label="Name"
-              rules={[{ required: true, message: 'Please enter user name' }]}
+              label="Category Name"
+              rules={[{ required: true, message: 'Please enter category name' }]}
             >
-              <Input placeholder="Please enter user name" />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="url"
-              label="Url"
-              rules={[{ required: true, message: 'Please enter url' }]}
-            >
-              <Input
-                style={{ width: '100%' }}
-                addonBefore="http://"
-                addonAfter=".com"
-                placeholder="Please enter url"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="owner"
-              label="Owner"
-              rules={[{ required: true, message: 'Please select an owner' }]}
-            >
-              <Select placeholder="Please select an owner">
-                <Option value="xiao">Xiaoxiao Fu</Option>
-                <Option value="mao">Maomao Zhou</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="type"
-              label="Type"
-              rules={[{ required: true, message: 'Please choose the type' }]}
-            >
-              <Select placeholder="Please choose the type">
-                <Option value="private">Private</Option>
-                <Option value="public">Public</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="approver"
-              label="Approver"
-              rules={[{ required: true, message: 'Please choose the approver' }]}
-            >
-              <Select placeholder="Please choose the approver">
-                <Option value="jack">Jack Ma</Option>
-                <Option value="tom">Tom Liu</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="dateTime"
-              label="DateTime"
-              rules={[{ required: true, message: 'Please choose the dateTime' }]}
-            >
-              <DatePicker.RangePicker
-                style={{ width: '100%' }}
-                getPopupContainer={(trigger) => trigger.parentElement!}
-              />
+              <Input placeholder="Enter a unique name for the category" />
             </Form.Item>
           </Col>
         </Row>
@@ -127,11 +81,30 @@ const AddNewCategoryDrawer: FC = () => {
               rules={[
                 {
                   required: true,
-                  message: 'please enter url description'
+                  message: 'please enter description'
                 }
               ]}
             >
-              <Input.TextArea rows={4} placeholder="please enter url description" />
+              <Input.TextArea
+                rows={4}
+                showCount
+                maxLength={100}
+                placeholder="Provide a brief description of the category"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item
+              name="status"
+              label="Status"
+              rules={[{ required: true, message: 'Please choose the status' }]}
+            >
+              <Select placeholder="Select whether this category is active and should be shown in the menu">
+                <Option value="active">Active</Option>
+                <Option value="deactive">Deactive</Option>
+              </Select>
             </Form.Item>
           </Col>
         </Row>
