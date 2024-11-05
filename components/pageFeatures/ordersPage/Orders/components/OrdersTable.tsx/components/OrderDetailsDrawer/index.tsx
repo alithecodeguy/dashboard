@@ -3,7 +3,7 @@ import type { FC } from 'react';
 
 // libraries
 import { Badge, Button, Card, Divider, Drawer, Flex, Input, Radio, Tag, Typography } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { IoShareSocialOutline } from 'react-icons/io5';
 import { IoCard } from 'react-icons/io5';
 import Image from 'next/image';
@@ -105,19 +105,46 @@ const OrderDetailsDrawer: FC = () => {
             <Text strong style={{ fontSize: 18 }}>
               Items
             </Text>
-            <Badge count={2} style={{ background: primaryBlue1, color: primaryBlue6 }} />
+            <Badge count={1} style={{ background: primaryBlue1, color: primaryBlue6 }} />
           </Flex>
           <Card className="order" bodyStyle={{ padding: '8px' }}>
             <Flex vertical gap={12}>
-              <Flex gap={8} align="center">
+              <Flex gap={8} align="center" style={{ position: 'relative' }}>
                 <Image
                   src={'/assets/images/png/orders_table_order_item_image.png'}
                   width={96}
                   height={96}
                   alt={'food_item'}
                 />
+                <Image
+                  src={'/assets/images/png/vegeterian_label.png'}
+                  width={55}
+                  height={22}
+                  alt={'food_label'}
+                  style={{ position: 'absolute', top: 0, left: 0 }}
+                />
+                <Flex vertical>
+                  <Text strong>Kleine Yogurtlu </Text>
+                  <Flex vertical>
+                    <Flex gap={8} align="center">
+                      <Text strong>Extra:</Text>
+                      <Text>Mustard</Text>
+                    </Flex>
+                    <Flex gap={8} align="center">
+                      <Text strong>Food Id:</Text>
+                      <Text>#323456</Text>
+                    </Flex>
+                  </Flex>
+                </Flex>
               </Flex>
-              <span>count and price</span>
+              <Flex justify="space-between" align="center">
+                <Flex align="center" gap={8}>
+                  <Button size="small" shape="circle" type="primary" icon={<MinusOutlined />} />
+                  <Text style={{ fontSize: 16 }}>2</Text>
+                  <Button size="small" shape="circle" type="primary" icon={<PlusOutlined />} />
+                </Flex>
+                <Text style={{ fontSize: 16 }}>$ 244</Text>
+              </Flex>
             </Flex>
           </Card>
         </Flex>
