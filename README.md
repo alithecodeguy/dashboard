@@ -1,10 +1,10 @@
 # Dimenu Dashboard
 
-## Please only use yarn (not npm or pnpm)
+### Please only use yarn (not npm or pnpm)
 
-## Please don't use "any" type
+### Please don't use "any" type
 
-## Please don't change any project's config
+### Please don't change any project's config
 
 Run the development server:
 
