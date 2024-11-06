@@ -1,6 +1,9 @@
 // types
 import type { FC } from 'react';
 
+// enums
+import { NotificationEnum } from '@/enums/common';
+
 // libraries
 import Image from 'next/image';
 import { IoCard } from 'react-icons/io5';
@@ -8,6 +11,9 @@ import { blue, green } from '@ant-design/colors';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Badge, Button, Card, Divider, Flex, Input, Tag, Typography } from 'antd';
+
+// utils
+import openNotification from '@/utils/notification';
 
 // destructure
 const { Text } = Typography;
@@ -136,7 +142,11 @@ const Details: FC = () => {
             <Text>Section id</Text>
             <Flex gap={8} align="center">
               <Text>8349983</Text>
-              <Button type="primary" size="small">
+              <Button
+                onClick={() => openNotification(NotificationEnum.SUCCESS, 'Successful', 'Copied!')}
+                type="primary"
+                size="small"
+              >
                 copy
               </Button>
             </Flex>

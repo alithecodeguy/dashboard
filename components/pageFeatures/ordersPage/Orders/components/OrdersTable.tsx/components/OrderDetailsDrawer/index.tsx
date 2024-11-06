@@ -17,11 +17,15 @@ import {
 } from '@/libs/redux/slices/ordersSlice';
 
 // enums
+import { NotificationEnum } from '@/enums/common';
 import { OrderDetailsDrawerTypeEnum } from '@/libs/redux/slices/ordersSlice/ordersSliceEnum';
 
 // components
 import Details from './components/Details';
 import Delivery from './components/Delivery';
+
+// utils
+import openNotification from '@/utils/notification';
 
 const OrderDetailsDrawer: FC = () => {
   // hooks
@@ -46,14 +50,14 @@ const OrderDetailsDrawer: FC = () => {
           <Button
             style={{ color: blue.primary }}
             type="text"
-            onClick={onClose}
+            onClick={() => openNotification(NotificationEnum.SUCCESS, 'Successful', 'Copied!')}
             size="large"
             icon={<IoShareSocialOutline />}
           />
           <Button
             style={{ color: blue.primary }}
             type="text"
-            onClick={onClose}
+            onClick={() => openNotification(NotificationEnum.INFO, 'Info', 'Download started.')}
             size="large"
             icon={<DownloadOutlined />}
           />
@@ -75,7 +79,11 @@ const OrderDetailsDrawer: FC = () => {
         {orderDetailsDrawerType === OrderDetailsDrawerTypeEnum.DELIVERY && <Delivery />}
 
         {orderDetailsDrawerType === OrderDetailsDrawerTypeEnum.DETAILS && (
-          <Button type="primary" block>
+          <Button
+            onClick={() => openNotification(NotificationEnum.INFO, 'Info', 'Printing....')}
+            type="primary"
+            block
+          >
             Print Details
           </Button>
         )}
