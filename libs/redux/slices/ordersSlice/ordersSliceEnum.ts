@@ -1,4 +1,4 @@
-export enum ThemeEnum {
-  LIGHT = 'light',
-  DARK = 'dark'
+export enum OrderDetailsDrawerTypeEnum {
+  DETAILS,
+  DELIVERY
 }

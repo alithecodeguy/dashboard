@@ -7,10 +7,14 @@ import type { RootState } from '../../store';
 // initial state
 import { ordersSliceInitialState } from './ordersSliceInitialState';
 
+// enums
+import { OrderDetailsDrawerTypeEnum } from './ordersSliceEnum';
+
 const ordersSlice = createSlice({
   name: 'orders',
   initialState: ordersSliceInitialState,
   reducers: {
+    // orderDetailsDrawerStatus
     changeOrderDetailsDrawer(state, action: PayloadAction<boolean>) {
       state.orderDetailsDrawerStatus = action.payload;
     },
@@ -22,6 +26,14 @@ const ordersSlice = createSlice({
     },
     toggleOrderDetailsDrawerStatus(state) {
       state.orderDetailsDrawerStatus = !state.orderDetailsDrawerStatus;
+    },
+    // orderDetailsDrawerType
+    toggleOrderDetailsDrawerType(state) {
+      if (state.orderDetailsDrawerType === OrderDetailsDrawerTypeEnum.DELIVERY) {
+        state.orderDetailsDrawerType = OrderDetailsDrawerTypeEnum.DETAILS;
+      } else {
+        state.orderDetailsDrawerType = OrderDetailsDrawerTypeEnum.DELIVERY;
+      }
     }
   }
 });
@@ -31,12 +43,16 @@ export const {
   changeOrderDetailsDrawer,
   closeOrderDetailsDrawer,
   openOrderDetailsDrawer,
-  toggleOrderDetailsDrawerStatus
+  toggleOrderDetailsDrawerStatus,
+  toggleOrderDetailsDrawerType
 } = ordersSlice.actions;
 
 // selector
 export const selectOrderDetailsDrawerStatus = (state: RootState) =>
   state.orders.orderDetailsDrawerStatus;
+
+export const selectToggleOrderDetailsDrawerType = (state: RootState) =>
+  state.orders.orderDetailsDrawerType;
 
 // reducer
 export default ordersSlice.reducer;
