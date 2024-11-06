@@ -1,8 +1,8 @@
 // types
-import Foods from '@/components/pageFeatures/foodsPage/Foods';
 import type { NextPage } from 'next';
 
 // components
+import Foods from '@/components/pageFeatures/foodsPage/Foods';
 
 const FoodsPage: NextPage = () => {
   return <Foods />;
