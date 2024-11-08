@@ -4,12 +4,19 @@ import { Button, Flex, Tag, Typography } from 'antd';
 // types
 import type { TableProps } from 'antd';
 import type { DataType } from './foodsTableType';
+import type { FC } from 'react';
 
 // enums
-import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
-import { IoPrintSharp, IoShareSocialOutline } from 'react-icons/io5';
-import { FC } from 'react';
 import { FoodsStatusEnum } from './foodsTableEnum';
+
+// redux
+import { useAppDispatch } from '@/libs/redux/hooks';
+import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
+import { changeEditableFoodId, openEditFoodDrawer } from '@/libs/redux/slices/foodsSlice';
+
+// libraries
+import Image from 'next/image';
+import { RiDeleteBin2Fill, RiEditFill } from 'react-icons/ri';
 
 // destrcuture
 const { Text } = Typography;
@@ -35,112 +42,95 @@ const StatusTag: FC<{ foodsStatus: FoodsStatusEnum }> = ({ foodsStatus }) => {
   return <></>;
 };
 
+const ActionButtons: FC<{ showDeleteConfirm: () => void; foodId: number }> = ({
+  showDeleteConfirm,
+  foodId
+}) => {
+  const dispatch = useAppDispatch();
+  return (
+    <Flex gap={12}>
+      <RiEditFill
+        onClick={() => {
+          dispatch(openEditFoodDrawer());
+          dispatch(changeEditableFoodId(foodId));
+        }}
+        size={20}
+        style={{ cursor: 'pointer' }}
+      />
+      <RiDeleteBin2Fill
+        onClick={() => showDeleteConfirm()}
+        size={20}
+        style={{ cursor: 'pointer' }}
+      />
+    </Flex>
+  );
+};
+
 export const ordersTableColumns = (
   pageSize: PageSizeEnum,
-  openDetailsDrawer: () => void
+  openDetailsDrawer: () => void,
+  showDeleteConfirm: () => void
 ): ColumnsType<DataType> => [
   {
-    title: 'Food ID',
-    dataIndex: 'foodId',
-    key: 'foodId',
+    title: 'Name & Description',
+    dataIndex: 'nameAndDescription',
+    key: 'nameAndDescription',
     render: (_, record) => {
       return (
-        <Flex vertical>
-          foodId
-          {/* <Flex align="center" gap={8}>
-            <Text strong style={{ color: record.newOrder ? 'blue' : 'initial' }}>
-              #{record.orderId}
-            </Text>
-          </Flex>
-          {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>} */}
-        </Flex>
-      );
-    }
-  },
-  {
-    title: 'Food Image',
-    dataIndex: 'foodImage',
-    key: 'foodImage',
-    render: (_, record) => {
-      return (
-        <Flex vertical>
-          foodImage
-          {/* <Flex align="center" gap={8}>
-            <Text strong style={{ color: record.newOrder ? 'blue' : 'initial' }}>
-              #{record.orderId}
-            </Text>
-          </Flex>
-          {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>} */}
-        </Flex>
-      );
-    }
-  },
-  {
-    title: 'Title & Description',
-    dataIndex: 'foodInfo',
-    key: 'foodInfo',
-    render: (_, record) => {
-      return (
-        <Flex vertical>
-          foodInfo
-          {/* <Flex align="center" gap={8}>
-            <Text strong style={{ color: record.newOrder ? 'blue' : 'initial' }}>
-              #{record.orderId}
-            </Text>
-          </Flex>
-          {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>} */}
+        <Flex vertical gap={4}>
+          <Image src={record.foodImageUrl} height={72} width={72} alt={record.foodCategory} />
+          <Text strong>#{record.foodId}</Text>
+          <Text strong>{record.foodTitle}</Text>
+          <Text>{record.foodDescription}</Text>
+          {pageSize === PageSizeEnum.SM && (
+            <Flex gap={12} align="center">
+              <StatusTag foodsStatus={record.foodStatus} />
+              <ActionButtons showDeleteConfirm={showDeleteConfirm} foodId={record.foodId} />
+              <Button onClick={() => openDetailsDrawer()} type="link" style={{ paddingLeft: 0 }}>
+                See Extras
+              </Button>
+            </Flex>
+          )}
         </Flex>
       );
     }
   },
   {
     title: 'Category',
-    dataIndex: 'category',
-    key: 'category',
-    render: (_, record) => {
-      return (
-        <Flex vertical>
-          category
-          {/* <Flex align="center" gap={8}>
-            <Text strong style={{ color: record.newOrder ? 'blue' : 'initial' }}>
-              #{record.orderId}
-            </Text>
-          </Flex>
-          {pageSize !== PageSizeEnum.SM && <Text>{record.email}</Text>} */}
-        </Flex>
-      );
-    }
+    dataIndex: 'foodCategory',
+    key: 'foodCategory',
+    hidden: pageSize === PageSizeEnum.SM || pageSize === PageSizeEnum.MD
   },
   {
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
+    hidden: pageSize === PageSizeEnum.SM,
     render: (_, record) => {
-      return <StatusTag foodsStatus={record.status} />;
+      return <StatusTag foodsStatus={record.foodStatus} />;
     }
   },
   {
     title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
-    render: (cost: number) => `€ ${cost.toLocaleString('en')}`
+    dataIndex: 'foodPrice',
+    key: 'foodPrice',
+    hidden: pageSize === PageSizeEnum.SM || pageSize === PageSizeEnum.MD,
+    render: (price: number) => `€ ${price.toLocaleString('en')}`
   },
   {
     title: 'Actions',
     dataIndex: 'actions',
     key: 'actions',
+    hidden: pageSize === PageSizeEnum.SM,
     render: (_, record) => (
-      <Flex gap={12}>
-        <IoShareSocialOutline size={20} style={{ cursor: 'pointer' }} />
-        <IoPrintSharp size={20} style={{ cursor: 'pointer' }} />
-      </Flex>
+      <ActionButtons showDeleteConfirm={showDeleteConfirm} foodId={record.foodId} />
     )
   },
   {
     title: 'Extras',
     dataIndex: 'extra',
     key: 'extra',
-    hidden: pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM,
+    hidden: pageSize === PageSizeEnum.SM,
     render: () => (
       <Button onClick={() => openDetailsDrawer()} type="link" style={{ paddingLeft: 0 }}>
         See Extras

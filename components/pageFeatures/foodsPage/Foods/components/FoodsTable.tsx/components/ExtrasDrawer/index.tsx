@@ -2,47 +2,34 @@
 import type { FC } from 'react';
 
 // libraries
-import { Button, Drawer, Flex, Radio } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
-import { IoShareSocialOutline } from 'react-icons/io5';
-import { blue } from '@ant-design/colors';
+import { Drawer, Flex } from 'antd';
 
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import {
-  closeOrderDetailsDrawer,
-  selectOrderDetailsDrawerStatus,
-  selectToggleOrderDetailsDrawerType,
-  toggleOrderDetailsDrawerType
-} from '@/libs/redux/slices/ordersSlice';
-
-// enums
-import { NotificationEnum } from '@/enums/common';
-import { OrderDetailsDrawerTypeEnum } from '@/libs/redux/slices/ordersSlice/ordersSliceEnum';
+  closeFoodExtrasDrawer,
+  selectFoodExtrasDrawerStatus
+} from '@/libs/redux/slices/foodsSlice';
 
 // components
-import Details from './components/Extras';
-
-// utils
-import openNotification from '@/utils/notification';
+import Extras from './components/Extras';
 
 const ExtrasDrawer: FC = () => {
   // hooks
   const dispatch = useAppDispatch();
 
   // selectors
-  const orderDetailsDrawerStatus = useAppSelector(selectOrderDetailsDrawerStatus);
-  const orderDetailsDrawerType = useAppSelector(selectToggleOrderDetailsDrawerType);
+  const foodExtrasDrawerStatus = useAppSelector(selectFoodExtrasDrawerStatus);
 
   // handlers
   const onClose = () => {
-    dispatch(closeOrderDetailsDrawer());
+    dispatch(closeFoodExtrasDrawer());
   };
 
   return (
-    <Drawer title="Extras" onClose={onClose} open={orderDetailsDrawerStatus}>
+    <Drawer title="Extras" onClose={onClose} open={foodExtrasDrawerStatus}>
       <Flex vertical gap={32}>
-        {orderDetailsDrawerType === OrderDetailsDrawerTypeEnum.DETAILS && <Details />}
+        <Extras />
       </Flex>
     </Drawer>
   );

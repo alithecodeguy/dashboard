@@ -1,6 +1,6 @@
 // libraries
 import { Button, Col, Flex, Input, Row, Tabs, TabsProps, Typography } from 'antd';
-import { SearchOutlined, DownloadOutlined } from '@ant-design/icons';
+import { SearchOutlined, PlusCircleFilled } from '@ant-design/icons';
 
 // types
 import type { FC } from 'react';
@@ -9,8 +9,9 @@ import type { FC } from 'react';
 import styles from './foods.module.css';
 
 // redux
-import { useAppSelector } from '@/libs/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import { selectSiderStatus } from '@/libs/redux/slices/sharedSlice';
+import { openAddNewFoodDrawer } from '@/libs/redux/slices/foodsSlice/index.ts';
 
 // hooks
 import usePageTitle from '@/hooks/usePageTitle';
@@ -27,6 +28,7 @@ const { Text } = Typography;
 const Orders: FC = () => {
   // hooks
   const pageTitle = usePageTitle();
+  const dispatch = useAppDispatch();
 
   // selectors
   const isSiderCollapsed = useAppSelector(selectSiderStatus);
@@ -63,8 +65,13 @@ const Orders: FC = () => {
                 prefix={<SearchOutlined className={styles.search_input_icon} />}
               />
             </Flex>
-            <Button type="primary" size={'large'} icon={<DownloadOutlined />}>
-              Export Excel
+            <Button
+              onClick={() => dispatch(openAddNewFoodDrawer())}
+              type="primary"
+              size={'large'}
+              icon={<PlusCircleFilled />}
+            >
+              Add Food
             </Button>
           </Flex>
           <Tabs defaultActiveKey="1" items={items} onChange={onChange} />

@@ -4,11 +4,11 @@ import { FoodsCategoryEnum, FoodsStatusEnum, FoodsTypeEnum } from './foodsTableE
 export interface DataType {
   key: string;
   foodId: number;
-  foodImage: string;
-  type: FoodsTypeEnum;
-  title: string;
-  description: string;
-  category: FoodsCategoryEnum.PASTA;
-  status: FoodsStatusEnum.ACTIVE;
-  price: number;
+  foodImageUrl: string;
+  foodType: FoodsTypeEnum;
+  foodTitle: string;
+  foodDescription: string;
+  foodCategory: FoodsCategoryEnum.PASTA;
+  foodStatus: FoodsStatusEnum.ACTIVE;
+  foodPrice: number;
 }

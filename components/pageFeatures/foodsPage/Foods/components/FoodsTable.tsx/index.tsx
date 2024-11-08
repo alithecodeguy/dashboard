@@ -1,5 +1,6 @@
 // libraries
-import { Button, Flex, Table, Typography } from 'antd';
+import { Flex, Modal, Table, Typography } from 'antd';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 // types
 import type { FC } from 'react';
@@ -12,16 +13,19 @@ import { ordersTableMockData } from './foodsTableMockData';
 // redux
 import { useAppDispatch, useAppSelector } from '@/libs/redux/hooks';
 import { selectPageSize } from '@/libs/redux/slices/sharedSlice';
-import { openOrderDetailsDrawer } from '@/libs/redux/slices/ordersSlice';
+import { openFoodExtrasDrawer } from '@/libs/redux/slices/foodsSlice';
 
 // enums
 import { PageSizeEnum } from '@/libs/redux/slices/sharedSlice/sharedSliceEnum';
 import { OrdersFilterEnum } from './foodsTableEnum';
 
 // components
-import OrderDetailsDrawer from './components/ExtrasDrawer';
+import ExtrasDrawer from './components/ExtrasDrawer';
+import EditFoodDrawer from './components/EditFoodDrawer';
+import AddNewFoodDrawer from './components/AddNewFoodDrawer';
 
 // destructure
+const { confirm } = Modal;
 const { Text } = Typography;
 
 const FoodsTable: FC<{ ordersFilter: OrdersFilterEnum }> = ({ ordersFilter }) => {
@@ -29,8 +33,8 @@ const FoodsTable: FC<{ ordersFilter: OrdersFilterEnum }> = ({ ordersFilter }) =>
   const pageSize = useAppSelector(selectPageSize);
   const dispatch = useAppDispatch();
 
-  const openDetailsDrawer = () => {
-    dispatch(openOrderDetailsDrawer());
+  const openExtrasDrawer = () => {
+    dispatch(openFoodExtrasDrawer());
   };
 
   let filteredData = ordersTableMockData;
@@ -49,68 +53,88 @@ const FoodsTable: FC<{ ordersFilter: OrdersFilterEnum }> = ({ ordersFilter }) =>
   //   );
   // }
 
+  const showDeleteConfirm = () => {
+    confirm({
+      title: 'Are you sure delete this food?',
+      icon: <ExclamationCircleFilled />,
+      content: 'Some descriptions',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      }
+    });
+  };
+
   return (
     <>
       <Table<DataType>
-        columns={ordersTableColumns(pageSize!, openDetailsDrawer)}
+        columns={ordersTableColumns(pageSize!, openExtrasDrawer, showDeleteConfirm)}
         pagination={{ position: ['none', 'bottomCenter'] }}
         dataSource={filteredData}
         expandable={{
-          // expandedRowRender: (record) => (
-          //   <Flex vertical>
-          //     {pageSize === PageSizeEnum.SM && (
-          //       <>
-          //         <Flex gap={8}>
-          //           <Text strong>Email:</Text>
-          //           <Text>{record.email}</Text>
-          //         </Flex>
-          //         <Flex gap={8}>
-          //           <Text strong>Type:</Text>
-          //           <Text>{record.type}</Text>
-          //         </Flex>
-          //       </>
-          //     )}
-          //     {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
-          //       <>
-          //         <Flex gap={8}>
-          //           <Text strong>Payment Type:</Text>
-          //           <Text>{record.paymentType}</Text>
-          //         </Flex>
-          //         <Flex gap={8}>
-          //           <Text strong>Payment Status:</Text>
-          //           <Text>{record.paymentStatus}</Text>
-          //         </Flex>
-          //         <Flex gap={8}>
-          //           <Text strong>Waiter:</Text>
-          //           <Text>{record.waiter}</Text>
-          //         </Flex>
-          //         <Flex gap={8}>
-          //           <Text strong>Cost:</Text>
-          //           <Text>{`€ ${record.cost.toLocaleString('en')}`}</Text>
-          //         </Flex>
-          //         <Flex gap={8}>
-          //           <Text strong>Date:</Text>
-          //           <Text>{`${new Date(record.utcDateString).toLocaleString('en')}`}</Text>
-          //         </Flex>
-          //       </>
-          //     )}
+          expandedRowRender: (record) => (
+            <Flex vertical>
+              {(pageSize === PageSizeEnum.SM || pageSize === PageSizeEnum.MD) && (
+                <>
+                  <Flex gap={8}>
+                    <Text strong>Price:</Text>
+                    <Text>{record.foodPrice}</Text>
+                  </Flex>
+                  <Flex gap={8}>
+                    <Text strong>Category:</Text>
+                    <Text>{record.foodCategory}</Text>
+                  </Flex>
+                </>
+              )}
 
-          //     {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
-          //       <Flex gap={8}>
-          //         <Button
-          //           onClick={() => openDetailsDrawer()}
-          //           type="link"
-          //           style={{ paddingLeft: 0 }}>
-          //           See Details
-          //         </Button>
-          //       </Flex>
-          //     )}
-          //   </Flex>
-          // ),
+              {/* {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
+                <>
+                  <Flex gap={8}>
+                    <Text strong>Payment Type:</Text>
+                    <Text>{record.paymentType}</Text>
+                  </Flex>
+                  <Flex gap={8}>
+                    <Text strong>Payment Status:</Text>
+                    <Text>{record.paymentStatus}</Text>
+                  </Flex>
+                  <Flex gap={8}>
+                    <Text strong>Waiter:</Text>
+                    <Text>{record.waiter}</Text>
+                  </Flex>
+                  <Flex gap={8}>
+                    <Text strong>Cost:</Text>
+                    <Text>{`€ ${record.cost.toLocaleString('en')}`}</Text>
+                  </Flex>
+                  <Flex gap={8}>
+                    <Text strong>Date:</Text>
+                    <Text>{`${new Date(record.utcDateString).toLocaleString('en')}`}</Text>
+                  </Flex>
+                </>
+              )} */}
+
+              {/* {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
+                <Flex gap={8}>
+                  <Button
+                    onClick={() => openDetailsDrawer()}
+                    type="link"
+                    style={{ paddingLeft: 0 }}>
+                    See Details
+                  </Button>
+                </Flex>
+              )} */}
+            </Flex>
+          ),
           rowExpandable: (record) => pageSize !== PageSizeEnum.LG
         }}
       />
-      <OrderDetailsDrawer />
+      <ExtrasDrawer />
+      <EditFoodDrawer />
+      <AddNewFoodDrawer />
     </>
   );
 };
