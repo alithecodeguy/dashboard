@@ -68,7 +68,7 @@ const ActionButtons: FC<{ showDeleteConfirm: () => void; foodId: number }> = ({
 
 export const ordersTableColumns = (
   pageSize: PageSizeEnum,
-  openDetailsDrawer: () => void,
+  openExtrasDrawer: () => void,
   showDeleteConfirm: () => void
 ): ColumnsType<DataType> => [
   {
@@ -86,9 +86,6 @@ export const ordersTableColumns = (
             <Flex gap={12} align="center">
               <StatusTag foodsStatus={record.foodStatus} />
               <ActionButtons showDeleteConfirm={showDeleteConfirm} foodId={record.foodId} />
-              <Button onClick={() => openDetailsDrawer()} type="link" style={{ paddingLeft: 0 }}>
-                See Extras
-              </Button>
             </Flex>
           )}
         </Flex>
@@ -130,9 +127,9 @@ export const ordersTableColumns = (
     title: 'Extras',
     dataIndex: 'extra',
     key: 'extra',
-    hidden: pageSize === PageSizeEnum.SM,
+    hidden: pageSize === PageSizeEnum.SM || pageSize === PageSizeEnum.MD,
     render: () => (
-      <Button onClick={() => openDetailsDrawer()} type="link" style={{ paddingLeft: 0 }}>
+      <Button onClick={() => openExtrasDrawer()} type="link" style={{ paddingLeft: 0 }}>
         See Extras
       </Button>
     )

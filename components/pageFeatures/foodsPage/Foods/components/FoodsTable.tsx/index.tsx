@@ -1,5 +1,5 @@
 // libraries
-import { Flex, Modal, Table, Typography } from 'antd';
+import { Button, Flex, Modal, Table, Typography } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
 // types
@@ -89,44 +89,13 @@ const FoodsTable: FC<{ ordersFilter: OrdersFilterEnum }> = ({ ordersFilter }) =>
                     <Text strong>Category:</Text>
                     <Text>{record.foodCategory}</Text>
                   </Flex>
+                  <Flex>
+                    <Button onClick={openExtrasDrawer} type="link" style={{ paddingLeft: 0 }}>
+                      See Extras
+                    </Button>
+                  </Flex>
                 </>
               )}
-
-              {/* {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
-                <>
-                  <Flex gap={8}>
-                    <Text strong>Payment Type:</Text>
-                    <Text>{record.paymentType}</Text>
-                  </Flex>
-                  <Flex gap={8}>
-                    <Text strong>Payment Status:</Text>
-                    <Text>{record.paymentStatus}</Text>
-                  </Flex>
-                  <Flex gap={8}>
-                    <Text strong>Waiter:</Text>
-                    <Text>{record.waiter}</Text>
-                  </Flex>
-                  <Flex gap={8}>
-                    <Text strong>Cost:</Text>
-                    <Text>{`€ ${record.cost.toLocaleString('en')}`}</Text>
-                  </Flex>
-                  <Flex gap={8}>
-                    <Text strong>Date:</Text>
-                    <Text>{`${new Date(record.utcDateString).toLocaleString('en')}`}</Text>
-                  </Flex>
-                </>
-              )} */}
-
-              {/* {(pageSize === PageSizeEnum.MD || pageSize === PageSizeEnum.SM) && (
-                <Flex gap={8}>
-                  <Button
-                    onClick={() => openDetailsDrawer()}
-                    type="link"
-                    style={{ paddingLeft: 0 }}>
-                    See Details
-                  </Button>
-                </Flex>
-              )} */}
             </Flex>
           ),
           rowExpandable: (record) => pageSize !== PageSizeEnum.LG
